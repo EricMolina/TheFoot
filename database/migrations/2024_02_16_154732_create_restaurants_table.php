@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['Client', 'Manager', 'Administrator']);
-            $table->longText('profile_image');
-            $table->rememberToken();
+            $table->longText('description');
+            $table->longText('location')->nullable();
+            $table->longText('thumbnail')->nullable();
+            $table->integer('average_price');
+            $table->unsignedBigInteger('manager_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('manager_id')->references('id')->on('users');
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('restaurants');
     }
 };
