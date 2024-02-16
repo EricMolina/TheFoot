@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('restaurant_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('restaurant_id')->nullable();
-            $table->longText('image_url');
+            $table->longText('image_url')->nullable();;
             $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
