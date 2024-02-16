@@ -18,9 +18,11 @@ return new class extends Migration
             $table->integer('score');
             $table->longText('comment');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants');
         });
     }
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Models\Restaurant;
+use App\Models\Valoration;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,4 +43,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function restaurants() {
+        return $this->hasMany(Restaurant::class);
+    }
+
+    public function valorations() {
+        return $this->hasMany(Valoration::class);
+    }
 }
