@@ -14,22 +14,22 @@ body{
     /* background-color: red; */
 }
 #menuContriner{
-    margin-top: 1%;
+    margin-top: 1.15%;
     background-color: white;
     /* height: 10vh; */
-    -webkit-box-shadow: 0px 8px 6px -4px rgba(107, 107, 107, .1);
-    -moz-box-shadow: 0px 8px 6px -4px rgba(107,107,107,.1);
-    box-shadow: 0px 8px 6px -4px rgba(107,107,107,.1);
+    -webkit-box-shadow: 0px 10px 6px -4px rgba(107, 107, 107, .1);
+    -moz-box-shadow: 0px 10px 6px -4px rgba(107,107,107,.1);
+    box-shadow: 0px 10px 6px -4px rgba(107,107,107,.1);
     margin-bottom: 0%;
 }
 .text-align{
     text-align: center;
 }
 #logo{
-    padding-top: 1.5%;
-    padding-bottom: .9%;
+    padding-top: 1.3%;
+    padding-bottom: 1.10%;
     padding-left: 1%;
-    width: 9%;
+    width: 8.8%;
 }
 /* Font */
 .roboto-thin {
@@ -101,16 +101,18 @@ body{
 /* Login */
 #logContainer{
     background: linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,102,92,1) 50%, rgba(0,86,74,1) 100%);
-    width: 95%;
+    width: 94.8%;
     height: 70vh;
     margin: auto;
-    margin-top: 2.5%;
-    padding-top: .4%;
+    margin-top: 2.58%;
+    padding-top: 1.5%;
     border-radius: 16px;
-    background-image: url(../img/loginPhoto.png), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
+    background-image: url(../img/loginPhoto.webp), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
     background-position: center;
-    background-position-x: 120%;
+    background-position-x: 126%;
     background-repeat: no-repeat;
+    align-items: center;
+    /* display: flex; */
 }
 #loginTitle{
     color: white;
@@ -134,4 +136,42 @@ body{
 }
 .subTitule{
     color: white;
+    font-size: 15px;
+}
+#loginForm{
+    margin-top: 4%;
+}
+label{
+    color: white;
+    display: flex;
+    /* font-size: 1.5rem; */
+    justify-content: center;
+    align-items: center;
+}
+input {   
+    border: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    /* margin-left: 50%; */
+    display: block;
+    margin : 0 auto;
+    width: 20%;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: .5%;
+    margin-top: .5%;
+}
+input:focus{
+    outline: none;
+    border: none;
+    border-bottom: 4px solid rgb(255, 255, 255);
+    /* background-color: hsl(174, 98%, 23%); */
+}
+#loginbtn{
+    display: block;
+    margin: 0 auto;
+    width: 10%;
+    height: 5vh;
+    font-size: 17px;
 }
