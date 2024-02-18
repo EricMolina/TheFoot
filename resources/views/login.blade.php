@@ -1,10 +1,10 @@
-@extends('layouts.plantilla_login')
+@extends('layouts.layout_login')
 
 @section('titulo','The Foot - Login')
 
 @section('content')
     <div id="logContainer">
-        <h1 id="loginTitle" class="roboto-bold text-align">Login</h1>
+        <h1 id="loginTitle" class="roboto-bold text-align">Inicio de sesión</h1>
         <p class="text-align subTitule roboto-light-italic">Inicia sesión para descubrir y reservar el mejor restaurante</p>
         <form action="" method="post" id="loginForm">
             <label for="email" class="roboto-black">Correo electrónico</label>

@@ -19,5 +19,11 @@
         <img src="{{ URL::to('img/logo.png') }}" alt="" srcset="" id="logo">
     </div>
     @yield('content')
+    <div id="footer">
+        <img src="{{ URL::to('img/social/instaFooter.svg') }}" alt="" srcset="" class="footerIcon">
+        <img src="{{ URL::to('img/social/facebookFooter.svg') }}" alt="" srcset="" class="footerIcon">
+        <p class="roboto-black-italic">© 2024 La FourchetteSAS - Todos los derechos reservados</p>
+        <p style="margin-bottom: 0%" class="roboto-light-italic">Las ofertas promocionales están sujetas a las condiciones que figuran en la página del restaurante. Las ofertas en bebidas alcohólicas están dirigidas únicamente a adultos. El consumo excesivo de alcohol es perjudicial para la salud. Bebe con moderación.</p>
+    </div>
 </body>
 </html>

@@ -14,7 +14,7 @@ body{
     /* background-color: red; */
 }
 #menuContriner{
-    margin-top: 1.15%;
+    margin-top: .8%;
     background-color: white;
     /* height: 10vh; */
     -webkit-box-shadow: 0px 10px 6px -4px rgba(107, 107, 107, .1);
@@ -27,7 +27,7 @@ body{
 }
 #logo{
     padding-top: 1.3%;
-    padding-bottom: 1.10%;
+    padding-bottom: 1.4%;
     padding-left: 1%;
     width: 8.8%;
 }
@@ -102,12 +102,12 @@ body{
 #logContainer{
     background: linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,102,92,1) 50%, rgba(0,86,74,1) 100%);
     width: 94.8%;
-    height: 70vh;
+    height: 67.3vh;
     margin: auto;
     margin-top: 2.58%;
     padding-top: 1.5%;
     border-radius: 16px;
-    background-image: url(../img/loginPhoto.webp), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
+    background-image: url(../img/loginPhoto.png), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
     background-position: center;
     background-position-x: 126%;
     background-repeat: no-repeat;
@@ -165,7 +165,8 @@ input {
 input:focus{
     outline: none;
     border: none;
-    border-bottom: 4px solid rgb(255, 255, 255);
+    border-bottom: 3px solid rgb(255, 255, 255);
+    background-color: rgba(0,102,92,1);
     /* background-color: hsl(174, 98%, 23%); */
 }
 #loginbtn{
@@ -174,4 +175,68 @@ input:focus{
     width: 10%;
     height: 5vh;
     font-size: 17px;
+    color: rgba(0,86,74,1);
+    cursor: pointer;
+}
+#footer{
+  padding-top: 2%;
+  padding-bottom: 1%;
+  margin-top: 5.1%;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 0%;
+}
+.footerIcon{
+  width: 2%;
+  margin-left: .5%;
+  margin-right: .5%;
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px){
+  #logContainer{
+    height: 50vh;
+    width: 100%;
+    border-radius: 0%;
+    padding-top: 50%;
+    background-image: url(../img/loginPhoto2.webp), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
+    background-position-x: 50%;
+    background-position-y: -10%;
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+  }
+  input {
+    width: 50%;
+  }
+  #loginbtn{
+    width: 50%;
+  }
+  #logo{
+    padding-top: 1.3%;
+    padding-bottom: 1.4%;
+    padding-left: 1%;
+    width: 30%;
+  }
+  #menuContriner{
+    margin-top: 0%;
+  }
+  .footerIcon{
+    width: 10%;
+    margin-left: 2%;
+    cursor: pointer;
+  }
+  #footer{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    margin-top: 5.1%;
+    background-color: black;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 0%;
+    height: 16.3vh;
+  }
 }
