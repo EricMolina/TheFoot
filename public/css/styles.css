@@ -325,10 +325,78 @@ label{
   -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
   box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
 }
+#food_types>option{
+  color: black;
+}
 #filterMargin{
   width: 100%;
   height: 9vh;
   
+}
+#valoration{
+  margin-top: 1.1%;
+  padding-top: .5%;
+  padding-bottom: .5%;
+  margin-left: 1.3%;
+  width: 5%;
+}
+#valoration:focus{
+  -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+}
+.radioFilter{
+  margin-top: .5%;
+  float: left;
+}
+.radioLabel{
+  margin-top: 0%;
+  float: left;
+  color: black;
+  font-size: 13px;
+  padding-bottom: 0;
+  margin-bottom: 0%;
+}
+#orderBy{
+  margin-left: 18%;
+  margin-top: .5%;
+  text-align: center;
+  width: 20%;
+}
+#orderTxt{
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+#order1{
+  margin-left: 22%;
+}
+#orderBtn{
+  float: left;
+  margin-top: 1.1%;
+  margin-left: 1%;
+  padding-top: .5%;
+  padding-bottom: .5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #d5d8dc;
+  background-color: white;
+  cursor: pointer;
+}
+#orderBtn:hover{
+  border-color: #006399;
+  background-color: #f6f6f6;
+  color: #006399;
+}
+#orderBtn:focus{
+  border-color: #006399;
+  background-color: #f6f6f6;
+  color: #006399;
+  -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
 }
 @media only screen and (max-width: 600px){
   body{

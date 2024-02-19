@@ -25,5 +25,6 @@
         <p class="roboto-black-italic">© 2024 La FourchetteSAS - Todos los derechos reservados</p>
         <p style="margin-bottom: 0%" class="roboto-light-italic">Las ofertas promocionales están sujetas a las condiciones que figuran en la página del restaurante. Las ofertas en bebidas alcohólicas están dirigidas únicamente a adultos. El consumo excesivo de alcohol es perjudicial para la salud. Bebe con moderación.</p>
     </div>
+    <script src="{{ asset('js/home.js') }}"></script>
 </body>
 </html>
