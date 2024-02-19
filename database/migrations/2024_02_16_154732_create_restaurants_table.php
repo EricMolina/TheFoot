@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('location')->nullable();
             $table->longText('thumbnail')->nullable();
             $table->integer('average_price');
+            $table->integer('status')->nullable();
             $table->unsignedBigInteger('manager_id')->nullable();
             $table->timestamps();
 
