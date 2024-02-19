@@ -148,7 +148,7 @@ label{
     justify-content: center;
     align-items: center;
 }
-input {   
+.logininput {   
     border: none;
     border-bottom: 2px solid rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
@@ -162,7 +162,7 @@ input {
     margin-bottom: .5%;
     margin-top: .5%;
 }
-input:focus{
+.logininput:focus{
     outline: none;
     border: none;
     border-bottom: 3px solid rgb(255, 255, 255);
@@ -194,13 +194,156 @@ input:focus{
   margin-right: .5%;
   cursor: pointer;
 }
+#respLogin{
+  display: none;
+}
+/* Search */
+.searchContainer{
+  margin-top: .7%;
+  width: 50%;
+  height: 7vh;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d5d8dc;
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0%;
+  float: right;
+  margin-right: 10%;
+}
+.paisContainer{
+  margin-top: .7%;
+  height: 7vh;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d5d8dc;
+  border-radius: 8px;
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+  /* border-top-left-radius: 0px;
+  border-bottom-left-radius: 0%; */
+  float: right;
+  width: 20%;
+}
+#locationIcon{
+  margin-top: 5%;
+  float: left;
+  margin-left: 10%;
+  margin-right: 3%;
+  width: 4%;
+}
+#srcIcon{
+  margin-top: 2%;
+  float: left;
+  margin-left: 4%;
+  margin-right: 2%;
+  width: 3%;
+}
+.srcInput{
+  margin-top: .2%;
+  text-align: left;
+  width: 87%;
+  font-size: 13px;
+  border: none;
+  color: #959ba7;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+}
+.srcInput:hover{
+  background-color: #f9fafa;
+}
+.srcInput:focus{
+  outline: none !important;
+  border:2px solid #00665c;
+  border-radius: 6px;
+  color: black;
+  /* border-color: #00665c; */
+}
+.priceFilter{
+  float: left;
+  padding-top: .4%;
+  padding-bottom: .4%;
+  padding-left: 1%;
+  margin-top: 1%;
+  margin-left: 10%;
+  width: 12.5%;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 50px;
+  border-color: #006399;
+}
+.priceFilter:hover{
+  background-color: #f6f6f6;
+}
+.priceFilter:hover{
+  background-color: #f6f6f6;
+}
+.inputNumFilter{
+  width: 45%;
+  border: none;
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+.inputNumFilter:focus{
+  outline: none !important;
+}
+.inputNumFilter:hover{
+  background-color: #f6f6f6;
+}
+.border-right{
+  border-width: 0 1px 0 0;
+  border-style: none solid none none;
+  border-color: gray;
+  margin-right: 2%;
+}
+#food_types{
+  float: left;
+  margin-top: 1%;
+  margin-left: 1%;
+  padding-top: .5%;
+  padding-bottom: .5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #d5d8dc;
+  background-color: white;
+}
+#food_types:hover{
+  border-color: #006399;
+  background-color: #f6f6f6;
+  color: #006399;
+}
+#food_types:focus{
+  border-color: #006399;
+  background-color: #f6f6f6;
+  color: #006399;
+  -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+  box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+}
+#filterMargin{
+  width: 100%;
+  height: 9vh;
+  
+}
 @media only screen and (max-width: 600px){
+  body{
+    background-color: white;
+  }
+  #regBtn{
+    display:none;
+  }
   #logContainer{
+    margin-top: 0%;
     height: 50vh;
     width: 100%;
     border-radius: 0%;
     padding-top: 50%;
-    background-image: url(../img/loginPhoto2.webp), linear-gradient(90deg, rgba(0,86,74,1) 0%, rgba(0,86,74,1) 50%, rgba(0,102,92,1) 100%);
+    background-image: url(../img/loginPhoto2.webp), linear-gradient(180deg, rgba(0,72,65,1) 0%, rgba(0,71,64,1) 100%);
     background-position-x: 50%;
     background-position-y: -10%;
     /* padding-left: 10%;
@@ -208,35 +351,47 @@ input:focus{
     padding-bottom: 0%;
     margin-bottom: 0%;
   }
-  input {
-    width: 50%;
+  .logininput {
+    width: 70%;
   }
   #loginbtn{
     width: 50%;
   }
   #logo{
     padding-top: 1.3%;
-    padding-bottom: 1.4%;
+    padding-bottom: 1%;
     padding-left: 1%;
-    width: 30%;
+    width: 32%;
   }
   #menuContriner{
     margin-top: 0%;
+    padding-bottom: 1.5%;
+    padding-left: 3%;
+    padding-bottom: 3.6%;
   }
   .footerIcon{
     width: 10%;
     margin-left: 2%;
     cursor: pointer;
+    display: inline-block;
+  }
+  #respLogin{
+    display: block;
+    margin-top: 1.2%;
+    width: 5%;
+    float: right;
+    margin-right: 7%;
+    cursor:pointer;
   }
   #footer{
     padding-top: 2%;
     padding-bottom: 1%;
-    margin-top: 5.1%;
+    margin-top: 0%;
     background-color: black;
     color: white;
     font-size: 10px;
     text-align: center;
     margin-bottom: 0%;
-    height: 16.3vh;
+    height: 18.2vh;
   }
 }

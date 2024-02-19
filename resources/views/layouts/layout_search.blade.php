@@ -16,11 +16,9 @@
     @yield('regSection')
     <div id="menuContriner">
         <img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo">
-        <img src="{{ asset('img/respLogin.svg') }}" alt="" srcset="" id="respLogin">
+        @yield('filtro')
     </div>
-    <div id="logContainer">
-        @yield('content')
-    </div>
+    @yield('content')
     <div id="footer">
         <img src="{{ asset('img/social/instaFooter.svg') }}" alt="" srcset="" class="footerIcon">
         <img src="{{ asset('img/social/facebookFooter.svg') }}" alt="" srcset="" class="footerIcon">
