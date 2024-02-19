@@ -181,7 +181,7 @@ label{
 #footer{
   padding-top: 2%;
   padding-bottom: 1%;
-  margin-top: 5.1%;
+  margin-top: 5.5%;
   background-color: black;
   color: white;
   font-size: 12px;
@@ -397,6 +397,34 @@ label{
   -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
   -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
   box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+}
+/* Formulario de registrarse */
+.register{
+  width: 80%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column-3 {
+  width: 33.33%;
+  float: left;
+}
+#imgContainer{
+  margin-top: 5%;
+  border-style: solid;
+  border-color: white;
+  height: 200px;
+  width: 200px;
+}
+#profilePreview{
+  visibility: hidden;
+  height: 200px;
+  width: 200px;
+}
+input[type='file'] {
+  color: rgba(0, 0, 0, 0);
 }
 @media only screen and (max-width: 600px){
   body{

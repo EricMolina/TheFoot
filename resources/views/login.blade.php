@@ -11,7 +11,7 @@
     <form action="" method="post" id="loginForm">
         <label for="email" class="roboto-black">Correo electrónico</label>
         <br>
-        <input type="text" name="email" id="email" class="logininput">
+        <input type="email" name="email" id="email" class="logininput">
         <br>
         <label for="pwd" class="roboto-black">Contraseña</label>
         <br>
