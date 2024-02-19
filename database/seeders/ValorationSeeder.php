@@ -36,5 +36,12 @@ class ValorationSeeder extends Seeder
             'restaurant_id' => $restaurant2->id,
             'user_id' => $user2->id,
         ]);
+
+        Valoration::create([
+            'score' => 5,
+            'comment' => "No está nada mal!",
+            'restaurant_id' => $restaurant2->id,
+            'user_id' => $user2->id,
+        ]);
     }
 }

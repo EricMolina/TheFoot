@@ -24,6 +24,7 @@ class RestaurantSeeder extends Seeder
             'description' => "Pizzeria italiana con clases de PHP",
             'location' => "Bellvitge, L'Hospitalet de Llobregat, Barcelona",
             'average_price' => 175,
+            'status' => 1,
             'manager_id' => $user1->id
         ]);
 
@@ -32,6 +33,7 @@ class RestaurantSeeder extends Seeder
             'description' => "Les mejores papes con salchiches de tota barça",
             'location' => "El Raval, Barcelona",
             'average_price' => 12,
+            'status' => 1,
             'manager_id' => $user2->id
         ]);
     }
