@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ValorationController;
 use App\Http\Controllers\AdminRestaurantController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,10 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/api/admin/restaurants/{id}', 'show')->name('api.admin.restaurants.show');
         Route::post('/api/admin/restaurants/store', 'store')->name('api.admin.restaurants.store');
     });
+    Route::controller(AdminUserController::class)->group(function () {
+        Route::get('/api/admin/users/managers', 'managers')->name('api.admin.users.managers');
+    });
+    Route::resource('crud/users', AdminUserController::class);
 });
 //Auth::routes();
 
