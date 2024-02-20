@@ -40,7 +40,7 @@
 @section('searchContainer')
 {{-- Inicio del bloque del restaurante --}}
     <div class="resContainer row">
-        <div class="col-res1"><img src="{{asset('img/restauranteImg/fr-FR.png')}}" alt="" srcset=""></div>
+        <div class="col-res1"><img src="{{asset('img/restauranteImg/fr-FR.png')}}" alt="" srcset="" class="thumbnail"></div>
         <div class="col-res2">
             <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
             <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
