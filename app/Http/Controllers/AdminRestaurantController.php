@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\DB;
 class AdminRestaurantController extends Controller
 {
     public function list() {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('manager')->get();
 
         return $restaurants;
     }
 
-    public function show($id) {
-        $restaurant = Restaurant::with('foodtypes')->find($id);
+    public function show(Request $request) {
+        $restaurant = Restaurant::with('foodtypes')->with('images')->find($request->id);
 
         return $restaurant;
     }
@@ -88,7 +88,7 @@ class AdminRestaurantController extends Controller
 
     }
 
-    public function update($id, Request $request) {
+    public function update(Request $request) {
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
@@ -96,12 +96,13 @@ class AdminRestaurantController extends Controller
             'average_price' => 'required|integer',
             'status' => 'required|integer',
             'manager_id' => 'required|integer',
+            'foodtypes' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
 
-            $restaurant = Restaurant::find($id);
+            $restaurant = Restaurant::find($request->id);
 
             $manager = User::find($request->manager_id);
 
@@ -141,7 +142,9 @@ class AdminRestaurantController extends Controller
     }
 
 
-    public function destroy($id) {
+    public function destroy(Request $request) {
+        $id = $request->id;
+
         try {
             DB::beginTransaction();
             
@@ -167,13 +170,51 @@ class AdminRestaurantController extends Controller
             DB::rollBack();
             return "error";
         }
+    }
+
+
+    public function destroy_image(Request $request) {
+        try {
+            $restaurant_image = RestaurantImage::find($request->id);
+            $restaurant_id = $restaurant_image->restaurant_id;
+            $restaurant_image->delete();
+
+        } catch (Exception $e) {
+            return "error";
+        }
+
+        return RestaurantImage::where('restaurant_id', $restaurant_id)->get();
+    }
+
+    public function attach_image(Request $request) {
+        $request->validate([
+            'restaurant_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+
+        $image = $request->file('image');
+        $rand = substr(uniqid('', true), -5);
+        $images_name = $rand . "_" . time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images/restaurants'), $images_name);
+
+        $restaurant = Restaurant::find($request->restaurant_id);
+
+        try {
+            $restaurant_image = new RestaurantImage;
+            $restaurant_image->restaurant_id = $restaurant->id;
+            $restaurant_image->image_url = $images_name;
+            $restaurant_image->save();
+
+            return RestaurantImage::where('restaurant_id', $request->restaurant_id)->get();
+
+        }  catch (Exception $e) {
+            return "error";
+        }
 
     }
 
     
-    public function formejemplo($id) {
-        $restaurant = Restaurant::find($id);
-
-        return view('formejemplo', compact('restaurant'));
+    public function index() {
+        return view('restaurants.index');
     }
 }

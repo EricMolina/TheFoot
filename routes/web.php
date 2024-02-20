@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ValorationController;
 use App\Http\Controllers\AdminRestaurantController;
+use App\Http\Controllers\FoodtypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,25 +25,24 @@ Route::get('/', function () {
 Route::controller(RestaurantController::class)->group(function () {
     Route::get('/api/restaurants', 'list')->name('api.restaurants.list');
     Route::get('/api/restaurants/{id}', 'show')->name('api.restaurants.show');
+});
 
-    /*     Route::get('cursos', 'index')->name('cursos.index');
-    Route::get('cursos/{id}', 'show')->name('cursos.show');
-    Route::delete('cursos/{curso}', 'destroy')->name('cursos.destroy');
-    Route::put('cursos/{curso}', 'update')->name('cursos.update');
-    Route::get('cursos/create', 'create')->name('cursos.create');
-    Route::get('cursos/edit/{id}', 'edit')->name('cursos.edit');
-    Route::post('cursos/store', 'store')->name('cursos.store'); */
+
+Route::controller(FoodtypeController::class)->group(function () {
+    Route::get('/api/foodtypes', 'list')->name('api.foodtypes.list');
 });
 
 
 Route::controller(AdminRestaurantController::class)->group(function () {
     Route::get('/api/admin/restaurants', 'list')->name('api.admin.restaurants.list');
-    Route::get('/api/admin/restaurants/{id}', 'show')->name('api.admin.restaurants.show');
+    Route::get('/api/admin/restaurants/show', 'show')->name('api.admin.restaurants.show');
     Route::post('/api/admin/restaurants/store', 'store')->name('api.admin.restaurants.store');
-    Route::delete('/api/admin/restaurants/{id}', 'destroy')->name('api.admin.restaurants.destroy');
-    Route::put('/api/admin/restaurants/{id}', 'update')->name('api.admin.restaurants.update');
-    
-    Route::get('/api/admin/formejemplo/{id}', 'formejemplo')->name('api.admin.formejemplo');
+    Route::delete('/api/admin/restaurants/', 'destroy')->name('api.admin.restaurants.destroy');
+    Route::put('/api/admin/restaurants/', 'update')->name('api.admin.restaurants.update');
+    Route::delete('/api/admin/restaurants/images/', 'destroy_image')->name('api.admin.restaurants.images.destroy_image');
+    Route::post('/api/admin/restaurants/images/', 'attach_image')->name('api.admin.restaurants.images.attach_image');
+
+    Route::get('/crud/restaurants/', 'index')->name('crud.restaurants');
 });
 
 
