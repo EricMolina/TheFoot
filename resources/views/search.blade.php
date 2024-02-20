@@ -2,7 +2,7 @@
 @section('titulo','The Foot - Restaurantes')
 
 @section('regSection')
-    <a href="" id="regBtn" class="roboto-medium">Cerrar sesión</a>
+    <a href="" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <br>
 @endsection
 
@@ -35,6 +35,32 @@
     </form>
     <button id="orderBtn">ASC</button>
     <div id="filterMargin"></div>
+@endsection
+
+@section('searchContainer')
+{{-- Inicio del bloque del restaurante --}}
+    <div class="resContainer row">
+        <div class="col-res1"><img src="{{asset('img/restauranteImg/fr-FR.png')}}" alt="" srcset=""></div>
+        <div class="col-res2">
+            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
+            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
+            <h2 class="roboto-bold titleRes">Restaurante</h2>
+            <p class="roboto-light-italic">Dirección inventada 123</p>
+            <p class="roboto-light-italic">Precio medio: <span>10.50€</span></p>
+            <p class="roboto-bold">Comentario destacado</p>
+            <img src="{{asset('img/icons/quote.svg')}}" class="quote">
+            <p class="roboto-regular-italic">Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario</p>
+        </div>
+        <div class="col-res3">
+            <h1 class="scoreText">9.3</h1>
+            <br>
+            <img src="{{asset('img/icons/comm.svg')}}" class="commIcon">
+            <p class="commText">254</p>
+        </div>
+    </div>
+    <hr class="hrRes">
+{{-- Final del bloque --}}
+    
 @endsection
 @section('content')
     

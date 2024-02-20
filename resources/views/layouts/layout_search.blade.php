@@ -18,6 +18,12 @@
         <img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo">
         @yield('filtro')
     </div>
+    <div id="searchContainer">
+        <img src="{{asset("img/icons/home_icon.svg")}}" id="homeIcon"><p> <span>></span> Barcelona <span>></span> <strong class="roboto-bold">Restaurantes en Barcelona</strong></p>
+        <h2 class="roboto-bold titleRes">Los mejores restaurantes de Barcelona</h2>
+        <hr class="hrMain">
+        @yield('searchContainer')
+    </div>
     @yield('content')
     <div id="footer">
         <img src="{{ asset('img/social/instaFooter.svg') }}" alt="" srcset="" class="footerIcon">
