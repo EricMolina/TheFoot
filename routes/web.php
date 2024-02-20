@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ValorationController;
-use App\Http\Controllers\AdminRestaurantController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AdminRestaurantController;
 use App\Http\Controllers\AdminUserController;
 
 /*
@@ -50,8 +50,17 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/api/admin/restaurants', 'list')->name('api.admin.restaurants.list');
         Route::get('/api/admin/restaurants/{id}', 'show')->name('api.admin.restaurants.show');
         Route::post('/api/admin/restaurants/store', 'store')->name('api.admin.restaurants.store');
+        Route::delete('/api/admin/restaurants/{id}', 'destroy')->name('api.admin.restaurants.destroy');
+        Route::put('/api/admin/restaurants/{id}', 'update')->name('api.admin.restaurants.update');
     });
+
     Route::controller(AdminUserController::class)->group(function () {
+        Route::get('/api/admin/users/list', 'list')->name('api.admin.users.list');
+        Route::post('/api/admin/users/show', 'show')->name('api.admin.users.show');
+        Route::delete('/api/admin/users/delete', 'destroy')->name('api.admin.users.destroy');
+        Route::post('/api/admin/users/store', 'store')->name('api.admin.users.store');
+        Route::put('/api/admin/users/update', 'update')->name('api.admin.users.update');
+
         Route::get('/api/admin/users/managers', 'managers')->name('api.admin.users.managers');
     });
     Route::resource('crud/users', AdminUserController::class);
