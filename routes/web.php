@@ -62,8 +62,11 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/api/admin/users/update', 'update')->name('api.admin.users.update');
 
         Route::get('/api/admin/users/managers', 'managers')->name('api.admin.users.managers');
+        //Route::get('/api/admin/emails/restaurantChanged', 'restaurantChanged')->name('api.admin.emails.restaurantChanged');
     });
     Route::resource('crud/users', AdminUserController::class);
+
+    //Crea una ruta que devuelva los datos de /view/emails/restaurantChanged.blade.php del controlador AdminUserControllerç
 });
 //Auth::routes();
 
