@@ -571,10 +571,7 @@ label{
 }
 .scoreOp{
   float: right;
-  /* margin-left: 15%; */
-  margin-bottom: 0%;
-  padding-bottom: 0%;
-  font-size: 26px;
+  width: 15%;
 }
 .op{
   margin-left: 6%;
@@ -617,6 +614,7 @@ label{
   height: 50px; */
   padding: 0;
   margin: 0;
+  filter: drop-shadow(0 3px 1px rgba(0, 0, 0, 0.455));
 }
 
 .stars-container .star-empty {
@@ -641,6 +639,9 @@ label{
 .starFilter{
   width: 10%;
 }
+/* .starOp{
+  width: 20%;
+} */
 @media only screen and (max-width: 600px){
   body{
     background-color: white;

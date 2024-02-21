@@ -49,9 +49,20 @@
         </div>
     </div>
     {{-- formulario para poner comentarios --}}
-    <button id="addBtn">Añadir comentario</button>
+    <button id="addBtn">Comentar</button>
     <div id="opForm">
-        <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
+        <div class="stars-container scoreOp">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+            <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+        </div>
         <img src="{{asset('img/carousel2.jpg')}}" class="profilePic">
         <p class="roboto-bold userOp">Usuario</p>
         <form action="" method="post">
@@ -63,7 +74,18 @@
         <h1 class="roboto-bold">Opiniones</h1>
         <hr class="hrMain">
         {{-- Contenido del comentario --}}
-            <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
+            <div class="stars-container scoreOp">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+                <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+            </div>
             <img src="{{asset('img/carousel2.jpg')}}" class="profilePic">
             <p class="roboto-bold userOp">Usuario</p>
             <p class="roboto-light-italic dateOp">20/02/2024</p>
