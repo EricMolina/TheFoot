@@ -6,6 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>
 <body>
     <h1>Crud usuarios</h1>
@@ -15,6 +32,9 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Profile Image</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -38,6 +58,9 @@
                         userList.innerHTML += `
                             <tr>
                                 <td>${user.name}</td>
+                                <td>${user.email}</td>
+                                <td>${user.role}</td>
+                                <td><img src="{{ public_path('images/profiles/') }}${user.profile_image}" alt="Profile Image"></td>
                                 <td><button onclick="editUser(${user.id})">Editar</button></td>
                                 <td><button onclick="deleteUser(${user.id})">Eliminar</button></td>
                             </tr>
@@ -57,19 +80,19 @@
                     <form id="createUserForm" enctype="multipart/form-data">
                         @csrf
                         <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="name">
+                        <input type="text" id="name" name="name" class="swal2-input">
                         <br>
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email">
+                        <input type="email" id="email" name="email" class="swal2-input">
                         <br>
                         <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password">
+                        <input type="password" id="password" name="password" class="swal2-input">
                         <br>
                         <label for="profile_image">Imagen de perfil:</label>
-                        <input type="file" id="profile_image" name="profile_image">
+                        <input type="file" id="profile_image" name="profile_image" class="swal2-input">
                         <br>
                         <label for="role">Rol:</label>
-                        <input type="text" id="role" name="role">
+                        <input type="text" id="role" name="role" class="swal2-input">
                         <br>
                     </form>
                 `,
@@ -79,6 +102,11 @@
                 preConfirm: () => {
                     let form = document.getElementById('createUserForm');
                     let formData = new FormData(form);
+
+                    // Perform form validation
+                    if (!validateForm(true)) {
+                        return false;
+                    }
 
                     return fetch("{{ route('api.admin.users.store') }}", {
                         method: 'POST',
@@ -147,19 +175,19 @@
                             @csrf
                             @method('PUT')
                             <label for="name">Nombre:</label>
-                            <input type="text" id="name" name="name" value="${user.name}">
+                            <input type="text" id="name" name="name" value="${user.name}" class="swal2-input">
                             <br>
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="${user.email}">
+                            <input type="email" id="email" name="email" value="${user.email}" class="swal2-input">
                             <br>
                             <label for="password">Contraseña:</label>
-                            <input type="password" id="password" name="password">
+                            <input type="password" id="password" name="password" class="swal2-input">
                             <br>
                             <label for="profile_image">Imagen de perfil:</label>
-                            <input type="file" id="profile_image" name="profile_image">
+                            <input type="file" id="profile_image" name="profile_image" class="swal2-input">
                             <br>
                             <label for="role">Rol:</label>
-                            <input type="text" id="role" name="role" value="${user.role}">
+                            <input type="text" id="role" name="role" value="${user.role}" class="swal2-input">
                             <br>
                             <label for="current_profile_image">Foto de perfil actual:</label>
                             <img src="{{ asset('images/profiles/${user.profile_image}') }}" alt="Foto de perfil actual" width="100">
@@ -173,6 +201,11 @@
                         let formData = new FormData(form);
                         formData.append('id', id);
                         formData.append("_method", "PUT");
+
+                        // Perform form validation
+                        if (!validateForm()) {
+                            return false;
+                        }
 
                         return fetch("{{ route('api.admin.users.update') }}", {
                             method: 'POST',
@@ -195,6 +228,42 @@
             .catch(error => {
                 console.log(error);
             });
+        }
+
+        function validateForm(withPassword = false) {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let role = document.getElementById('role').value;
+            let password = null;
+            if (withPassword) {
+                password = document.getElementById('password').value;
+            }
+
+            if (name.trim() === '') {
+                Swal.showValidationMessage('Por favor, introduce un nombre válido');
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.trim() === '' || !emailRegex.test(email)) {
+                Swal.showValidationMessage('Por favor, introduce un email válido');
+                return false;
+            }
+
+            if (role.trim() === '') {
+                Swal.showValidationMessage('Por favor, selecciona un rol');
+                return false;
+            } else if (role.trim() !== 'Client' && role.trim() !== 'Manager' && role.trim() !== 'Administrator') {
+                Swal.showValidationMessage('Por favor, selecciona un rol válido');
+                return false;
+            }
+
+            if (withPassword && password.trim() === '') {
+                Swal.showValidationMessage('Por favor, introduce una contraseña válida');
+                return false;
+            }
+
+            return true;
         }
     </script>
 </body>
