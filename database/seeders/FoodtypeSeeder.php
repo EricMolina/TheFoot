@@ -28,7 +28,31 @@ class FoodtypeSeeder extends Seeder
         ]);
 
         Foodtype::create([
-            'name' => "Vegano"
+            'name' => "Vegana"
+        ]);
+
+        Foodtype::create([
+            'name' => "Griega"
+        ]);
+
+        Foodtype::create([
+            'name' => "China"
+        ]);
+
+        Foodtype::create([
+            'name' => "Turca"
+        ]);
+
+        Foodtype::create([
+            'name' => "Colombiana"
+        ]);
+
+        Foodtype::create([
+            'name' => "Venezolana"
+        ]);
+
+        Foodtype::create([
+            'name' => "Tailandesa"
         ]);
     }
 }

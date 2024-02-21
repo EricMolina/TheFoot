@@ -19,12 +19,18 @@ class RestaurantFoodtypeSeeder extends Seeder
         $restaurant1 = Restaurant::where('name', "Pizzeria Alberto's")->first();
         $restaurant2 = Restaurant::where('name', "Salchipapa de l'esquina")->first();
 
-        $foodtype1 = Foodtype::where('name', 'Italiana')->first();
-        $foodtype2 = Foodtype::where('name', 'Japonesa')->first();
-        $foodtype3 = Foodtype::where('name', 'Kebab')->first();
-        $foodtype4 = Foodtype::where('name', 'Vegano')->first();
+        $italiana = Foodtype::where('name', 'Italiana')->first();
+        $japonesa = Foodtype::where('name', 'Japonesa')->first();
+        $kebab = Foodtype::where('name', 'Kebab')->first();
+        $vegana = Foodtype::where('name', 'Vegana')->first();
+        $griega = Foodtype::where('name', 'Griega')->first();
+        $china = Foodtype::where('name', 'China')->first();
+        $turca = Foodtype::where('name', 'Turca')->first();
+        $colombiana = Foodtype::where('name', 'Colombiana')->first();
+        $venezolana = Foodtype::where('name', 'Venezolana')->first();
+        $tailandesa = Foodtype::where('name', 'Tailandesa')->first();
 
-        $restaurant1->foodtypes()->attach([$foodtype1->id, $foodtype2->id]);
-        $restaurant2->foodtypes()->attach([$foodtype3->id, $foodtype4->id]);
+        $restaurant1->foodtypes()->attach([$italiana->id, $japonesa->id]);
+        $restaurant2->foodtypes()->attach([$kebab->id, $vegana->id]);
     }
 }
