@@ -25,7 +25,21 @@
         <option value="0">Tipo de cocina</option>
         <option value="0">Tipo de cocina</option>
     </select>
-    <input type="number" name="" class="priceFilter" id="valoration" placeholder="nota min.">
+    {{-- <input type="number" name="" class="priceFilter" id="valoration" placeholder="nota min."> --}}
+    <div class="stars-container priceFilter" id="valoration">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
+
+        
+    </div>
     <form class="priceFilter roboto-medium" id="orderBy">
         <p id="orderTxt">Ordenar por:</p>
         <input type="radio" id="order1" name="order1" value="precio" class="radioFilter"/>

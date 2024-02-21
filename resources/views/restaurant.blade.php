@@ -33,7 +33,7 @@
     <div id="viewResContainer">
         <div class="row">
             <div class="colInfoRes">
-                <h1>Bar Paco</h1>
+                <h1 class="roboto-bold">Bar Paco</h1>
                 <img src="{{asset('img/icons/location.svg')}}" alt="" srcset="" id="dirIcon" class="iconsBg">
                 <p id="dirTxt">Dirección 123</p>
                 <br>
@@ -48,8 +48,19 @@
             </div>
         </div>
     </div>
+    {{-- formulario para poner comentarios --}}
+    <button id="addBtn">Añadir comentario</button>
+    <div id="opForm">
+        <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
+        <img src="{{asset('img/carousel2.jpg')}}" class="profilePic">
+        <p class="roboto-bold userOp">Usuario</p>
+        <form action="" method="post">
+            <textarea name="comment" id="comment" class="commentBox"></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
     <div id="opinionContainer">
-        <h1>Opiniones</h1>
+        <h1 class="roboto-bold">Opiniones</h1>
         <hr class="hrMain">
         {{-- Contenido del comentario --}}
             <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
@@ -60,26 +71,9 @@
             <p class="op roboto-medium-italic">Restaurante con mucho encanto, muy bien situado y muy bien decorado. El atún buenísimo. Para repetir y recomendar. Lo único que los vinos muy caros.</p>
         <hr class="hrMain">
         {{-- Fin del comentario --}}
-                {{-- Contenido del comentario --}}
-                <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
-                <img src="{{asset('img/carousel2.jpg')}}" class="profilePic">
-                <p class="roboto-bold userOp">Usuario</p>
-                <p class="roboto-light-italic dateOp">20/02/2024</p>
-                <br>
-                <p class="op roboto-medium-italic">Restaurante con mucho encanto, muy bien situado y muy bien decorado. El atún buenísimo. Para repetir y recomendar. Lo único que los vinos muy caros.</p>
-            <hr class="hrMain">
-            {{-- Fin del comentario --}}
-                    {{-- Contenido del comentario --}}
-                    <h1 class="scoreOp">9.3 <span id="totalScore" class="roboto-regular-italic">/10</span></h1>
-                    <img src="{{asset('img/carousel2.jpg')}}" class="profilePic">
-                    <p class="roboto-bold userOp">Usuario</p>
-                    <p class="roboto-light-italic dateOp">20/02/2024</p>
-                    <br>
-                    <p class="op roboto-medium-italic">Restaurante con mucho encanto, muy bien situado y muy bien decorado. El atún buenísimo. Para repetir y recomendar. Lo único que los vinos muy caros.</p>
-                <hr class="hrMain">
-                {{-- Fin del comentario --}}
                 
     </div>
+    <script src="{{asset('js/restaurant.js')}}"></script>
     <script>
         var splide = new Splide( '.splide', {
         type    : 'loop',
