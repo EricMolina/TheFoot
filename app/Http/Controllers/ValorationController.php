@@ -7,21 +7,39 @@ use App\Models\Restaurant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class ValorationController extends Controller
 {
+    public function create(Restaurant $restaurant) {
+        return view ('restaurantform', compact('restaurant'));
+    }
     public function store(Request $request) {
+        $request->validate([
+            'restaurant_id' => [
+                'exists:restaurants,id',
+                Rule::unique('valorations')->where(function ($query) {
+                    return $query->where('user_id', Auth::user()->id)
+                                 ->where('restaurant_id', request('restaurant_id'));
+                }),
+            ],
+            'score' => 'required|integer|between:1,10',
+        ]);
+
         $valoration = new Valoration;
-
-        $user = User::find($request->user);
-        $restaurant = Restaurant::find($request->restaurant);
-
-        $valoration->user_id = $user->id;
+        $restaurant = Restaurant::find($request->restaurant_id);
+        $valoration->user_id = Auth::user()->id;
         $valoration->restaurant_id = $restaurant->id;
         $valoration->score = $request->score;
         $valoration->comment = $request->comment;
         $valoration->save();
 
-        return 'creado papi';
+        if ($valoration->id) {
+            return response()->json(['status' => 'ok']);
+        } else {
+            return response()->json(['status' => 'bad']);
+        }
     }
 }

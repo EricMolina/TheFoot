@@ -22,6 +22,10 @@
         tr:hover {
             background-color: #f5f5f5;
         }
+        td img {
+            widows: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -60,7 +64,7 @@
                                 <td>${user.name}</td>
                                 <td>${user.email}</td>
                                 <td>${user.role}</td>
-                                <td><img src="{{ public_path('images/profiles/') }}${user.profile_image}" alt="Profile Image"></td>
+                                <td><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image"></td>
                                 <td><button onclick="editUser(${user.id})">Editar</button></td>
                                 <td><button onclick="deleteUser(${user.id})">Eliminar</button></td>
                             </tr>
@@ -216,7 +220,6 @@
                         })
                         .then(response => {
                             console.log(response);
-                            // Aquí puedes hacer algo con los datos del usuario, como mostrarlos en la interfaz
                             loadUsers(); // Reload the user list after editing a user
                         })
                         .catch(error => {

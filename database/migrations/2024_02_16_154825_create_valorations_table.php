@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('valorations', function (Blueprint $table) {
             $table->id();
             $table->integer('score');
-            $table->longText('comment');
+            $table->longText('comment')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
