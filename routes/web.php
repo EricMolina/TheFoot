@@ -72,7 +72,7 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/api/admin/users/update', 'update')->name('api.admin.users.update');
 
         Route::get('/api/admin/users/managers', 'managers')->name('api.admin.users.managers');
+        Route::get('/crud/users/', 'index')->name('crud.users');
     });
-    Route::resource('crud/users', AdminUserController::class);    
 });
 //Auth::routes();

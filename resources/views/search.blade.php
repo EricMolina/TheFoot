@@ -1,8 +1,21 @@
 @extends('layouts.layout_search')
 @section('titulo','The Foot - Restaurantes')
 @section('regSection')
-    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
-    <br>
+    
+    <div class="row" style="height: 20px">
+        <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    
+        @if(Auth::User()->role == 'Manager')         
+            <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
+        @else
+            @if(Auth::User()->role == 'Administrator')         
+                <a href="{{ Route('crud.restaurants')}}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>            
+                <a href="{{ Route('crud.users')}}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>            
+            @endif
+        @endif
+    
+        <br>
+    </div>
 @endsection
     <style>
         .stars-container img {
@@ -16,21 +29,23 @@
     {{-- <p style="float: left;">hola</p> --}}
     <div class="searchContainer">
         <img src="{{ asset('img/srcIcon.svg') }}" alt="" srcset="" id="srcIcon">
-        <input class="srcInput roboto-medium-italic" type="text" name="src" id="src" placeholder="Tipo de cocina, nombre del restaurante">
+        <input id="search-name" oninput="getRestaurants()" class="srcInput roboto-medium-italic" type="text" name="name" id="src" placeholder="Tipo de cocina, nombre del restaurante">
     </div>
     <div class="paisContainer">
         <img src="{{ asset('img/location.png') }}" alt="" srcset="" id="locationIcon">
         <p class="roboto-bold">Barcelona</p>
     </div>
     <form class="priceFilter">
-        <input type="number" name="min_price" id="min_price" class="inputNumFilter border-right roboto-medium" placeholder="Precio min.">
-        <input type="number" name="max_price" id="max_price" class="inputNumFilter roboto-medium" placeholder="Precio max.">
+        <input oninput="getRestaurants()" type="number" name="min_price" id="min_price" class="inputNumFilter border-right roboto-medium" placeholder="Precio min.">
+        <input oninput="getRestaurants()" type="number" name="max_price" id="max_price" class="inputNumFilter roboto-medium" placeholder="Precio max.">
     </form>
-    <select name="food_types" id="food_types" class="roboto-medium">
-        <option value="0">Tipo de cocina</option>
-        <option value="0">Tipo de cocina</option>
-        <option value="0">Tipo de cocina</option>
-    </select>
+    <div class="dropdown-container">
+        <label class="dropdown" for="foodtypes-check">Tipos de comida</label>
+        <input id="foodtypes-check" class="dropdown-check" type="checkbox">
+        <div class="dropdown-list" name="food_types" id="food-types">
+            <span value=""></span>
+        </div>
+    </div>
     {{-- <input type="number" name="" class="priceFilter" id="valoration" placeholder="nota min."> --}}
     <div class="stars-container priceFilter" id="valoration">
         <img id="star-1" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
@@ -43,41 +58,26 @@
         <img id="star-8" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
         <img id="star-9" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
         <img id="star-10" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <input type="hidden" id="valoration" value="">
     </div>
-    <form class="priceFilter roboto-medium" id="orderBy">
-        <p id="orderTxt">Ordenar por:</p>
-        <input type="radio" id="order1" name="order1" value="precio" class="radioFilter"/>
-        <label for="price" class="radioLabel">Precio medio</label>
-        <input type="radio" id="order2" name="order1" value="precio" class="radioFilter"/>
-        <label for="price" class="radioLabel">Valoración</label>
+    <form class="priceFilter roboto-medium orderby-container" id="orderBy">
+        <div>
+            <input oninput="getRestaurants()" type="radio" id="order1" name="order1" value="average_price" class="radioFilter"/>
+            <label for="order1" class="radioLabel">Precio medio</label>
+        </div>
+        <div>
+            <input oninput="getRestaurants()" type="radio" id="order2" name="order1" value="valoration" class="radioFilter"/>
+            <label for="order2" class="radioLabel">Valoración</label>
+        </div>
     </form>
-    <button id="orderBtn">ASC</button>
+    <button id="orderBtn" value="DESC">DESC</button>
     <div id="filterMargin"></div>
 @endsection
 
 @section('searchContainer')
-{{-- Inicio del bloque del restaurante --}}
-    <div class="resContainer row">
-        <div class="col-res1"><img src="{{asset('img/restauranteImg/fr-FR.png')}}" alt="" srcset="" class="thumbnail"></div>
-        <div class="col-res2">
-            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
-            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon">
-            <h2 class="roboto-bold titleRes">Restaurante</h2>
-            <p class="roboto-light-italic">Dirección inventada 123</p>
-            <p class="roboto-light-italic">Precio medio: <span>10.50€</span></p>
-            <p class="roboto-bold">Comentario destacado</p>
-            <img src="{{asset('img/icons/quote.svg')}}" class="quote">
-            <p class="roboto-regular-italic">Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario Comentario de un usuario</p>
-        </div>
-        <div class="col-res3">
-            <h1 class="scoreText">9.3</h1>
-            <br>
-            <img src="{{asset('img/icons/comm.svg')}}" class="commIcon">
-            <p class="commText">254</p>
-        </div>
+
+    <div id="restaurants-list">
     </div>
-    <hr class="hrRes">
-{{-- Final del bloque --}}
 
 <script>
     // Agregar el evento de clic a cada estrella
@@ -126,8 +126,9 @@
 
         // Función para cambiar el valor del input "score" al hacer clic en una estrella
         function changeScoreValue(starId) {
-            //et scoreInput = document.getElementById('score');
-            //scoreInput.value = starId.split('-')[1];
+            let scoreInput = document.getElementById('valoration');
+            scoreInput.value = starId.split('-')[1] / 2;
+            getRestaurants()
         }
 
         // Función para cambiar el estilo de los elementos hermanos de la estrella seleccionada
@@ -142,6 +143,112 @@
                 sibling = sibling.previousElementSibling;
             }
         }
+
+        
+        function displayRestaurants(restaurants) {
+            let restaurantList = document.getElementById('restaurants-list');
+            restaurantList.innerHTML = '';
+            
+            restaurants.forEach(restaurant => {
+                let avg_score = Number(restaurant.valorations_avg_score).toFixed(1)
+                restaurantList.innerHTML += `
+                    <div class="resContainer row">
+                        <div class="col-res1"><img src="{{asset('images/thumbnails')}}/${restaurant.thumbnail}" alt="" srcset="" class="thumbnail"></div>
+                        <div class="col-res2">
+                            <div class="restaurant-foodtypes">
+                                ${restaurant.foodtypes.map(foodtype => {
+                                    return `<img src="{{asset('img/icons/food')}}/${foodtype.icon}" class="resIcon">`
+                                }).join("")}
+                            </div>
+                            <h2 class="roboto-bold titleRes">${restaurant.name}</h2>
+                            <p class="roboto-light-italic">${restaurant.location}</p>
+                            <p class="roboto-light-italic">Precio medio: <span>${restaurant.average_price}€</span></p>
+                            <p class="roboto-bold">Descripción</p>
+                            <img src="{{asset('img/icons/quote.svg')}}" class="quote">
+                            <p class="roboto-regular-italic">${restaurant.description}</p>
+                        </div>
+                        <div class="col-res3">
+                            <h1 class="scoreText">${avg_score}</h1>
+                            <br>
+                            <img src="{{asset('img/icons/comm.svg')}}" class="commIcon">
+                            <p class="commText">${restaurant.valorations_count}</p>
+                        </div>
+                        <hr class="hrRes">
+                    </div><br>
+                `;
+            });
+        }
+
+
+        function displayFoodtypes(foodtypes) {
+            let foodtypesContainer = document.getElementById('food-types');
+
+            foodtypes.forEach(foodtype => {
+                foodtypesContainer.innerHTML += 
+                    `<div class="dropdown-option">
+                        <input oninput="getRestaurants()" class="foodtype-item" id="foodtype-option-${foodtype.id}" type="checkbox" value="${foodtype.id}" />
+                        <label for="foodtype-option-${foodtype.id}" >${foodtype.name}</label>
+                    </div>`;
+            });
+        }
+
+
+        function displayLoading() {
+            let restaurantList = document.getElementById('restaurants-list');
+            restaurantList.innerHTML = `<div class="loader-container"><span class="loader"></span></div>`;
+        }
+
+
+        function getRestaurants() {
+            displayLoading();
+
+            const name = document.getElementById('search-name').value;
+            const minPrice = document.getElementById('min_price').value;
+            const maxPrice = document.getElementById('max_price').value;
+            const sortOrder = document.getElementById('orderBtn').value;
+
+            let sortElement = document.querySelector('input[name="order1"]:checked');
+            let sort = sortElement ? sortElement.value : '';
+
+            let valorationElement = document.getElementById('valoration');
+            let valoration = valorationElement.value ? valorationElement.value : "";
+
+            let foodtypes = [];
+            document.querySelectorAll('.foodtype-item:checked').forEach((foodtype) => {
+                foodtypes.push(foodtype.value)
+            })
+
+            const queryString = new URLSearchParams({
+                'name': name,
+                'min_price': minPrice,
+                'max_price': maxPrice,
+                'valoration': valoration,
+                'food_types': foodtypes,
+                'sort': sort,
+                'sort_order': sortOrder
+            });
+
+            fetch(`{{ route('api.restaurants.list') }}?${queryString.toString()}`)
+            .then((res) => res.text())
+            .then((responseText) => {
+                let restaurants = JSON.parse(responseText);
+                displayRestaurants(restaurants);
+            })
+        }
+
+
+        function getFoodtypes() {
+            fetch("{{ route('api.foodtypes.list') }}")
+            .then((res) => res.text())
+            .then((responseText) => {
+                let foodtypes = JSON.parse(responseText);
+                displayFoodtypes(foodtypes);
+            })
+        }
+
+        getRestaurants();
+        getFoodtypes();
+
 </script>
     
 @endsection

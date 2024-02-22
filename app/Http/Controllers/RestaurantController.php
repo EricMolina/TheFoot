@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class RestaurantController extends Controller
 {
     public function list(Request $request) {
-        $restaurants_query = Restaurant::withAvg('valorations', 'score')->with('foodtypes');
+        $restaurants_query = Restaurant::withAvg('valorations', 'score')
+            ->with('foodtypes')
+            ->withCount('valorations');
         
         // Filters
         if ($request->has('name')) {
@@ -18,23 +20,23 @@ class RestaurantController extends Controller
             $restaurants_query->where('name', 'like', "%$name%");
         }
 
-        if ($request->has('min_price')) {
+        if ($request->has('min_price') && $request->filled('min_price')) {
             $min_price = $request->min_price;
             $restaurants_query->where('average_price', '>=', $min_price);
         }
 
-        if ($request->has('max_price')) {
+        if ($request->has('max_price') && $request->filled('max_price')) {
             $max_price = $request->max_price;
             $restaurants_query->where('average_price', '<=', $max_price);
         }
 
-        if ($request->has('valoration')) {
+        if ($request->has('valoration') && $request->filled('valoration')) {
             $valoration = $request->valoration;
             $restaurants_query->having('valorations_avg_score', '>=', $valoration);
         }
 
-        if ($request->has('food_types')) {
-            $food_types = $request->food_types;
+        if ($request->has('food_types') && $request->filled('food_types')) {
+            $food_types = explode(',', $request->food_types);
             $restaurants_query->whereHas('foodtypes', function ($query) use ($food_types) {
                 $query->whereIn('foodtypes.id', $food_types);
             });
