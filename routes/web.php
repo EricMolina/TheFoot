@@ -7,6 +7,7 @@ use App\Http\Controllers\ValorationController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminRestaurantController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ManagerRestaurantController;
 use App\Mail\RestaurantChanged;
 use App\Http\Controllers\FoodtypeController;
 
@@ -51,6 +52,20 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::middleware(['manager'])->group(function () {
+    Route::controller(ManagerRestaurantController::class)->group(function () {
+        Route::get('/api/manager/restaurants', 'list')->name('api.manager.restaurants.list');
+        Route::get('/api/manager/restaurants/show', 'show')->name('api.manager.restaurants.show');
+        Route::post('/api/manager/restaurants/store', 'store')->name('api.manager.restaurants.store');
+        Route::delete('/api/manager/restaurants/', 'destroy')->name('api.manager.restaurants.destroy');
+        Route::put('/api/manager/restaurants/', 'update')->name('api.manager.restaurants.update');
+        Route::delete('/api/manager/restaurants/images/', 'destroy_image')->name('api.manager.restaurants.images.destroy_image');
+        Route::post('/api/manager/restaurants/images/', 'attach_image')->name('api.manager.restaurants.images.attach_image');
+
+        Route::get('/my/restaurants/', 'index')->name('myrestaurants');
+    });
+});
+
 Route::middleware(['admin'])->group(function () {
     Route::controller(AdminRestaurantController::class)->group(function () {
         Route::get('/api/admin/restaurants', 'list')->name('api.admin.restaurants.list');
@@ -72,7 +87,7 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/api/admin/users/update', 'update')->name('api.admin.users.update');
 
         Route::get('/api/admin/users/managers', 'managers')->name('api.admin.users.managers');
+        Route::get('/crud/users/', 'index')->name('crud.users');
     });
-    Route::resource('crud/users', AdminUserController::class);    
 });
 //Auth::routes();

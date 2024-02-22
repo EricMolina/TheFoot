@@ -10,30 +10,27 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RestaurantChanged extends Mailable
+class RestaurantAccepted extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $updatedRestaurant;
-    public $oldRestaurant;
+    public $restaurant;
     public $manager;
 
-    public function __construct($updatedRestaurant, $oldRestaurant, $manager)
+    public function __construct($restaurant, $manager)
     {
-        $this->updatedRestaurant = $updatedRestaurant;
-        $this->oldRestaurant = $oldRestaurant;
+        $this->restaurant = $restaurant;
         $this->manager = $manager;
     }
 
     public function build()
     {
         return $this->from('thefoot.noreplay@gmail.com', 'TheFoot')
-                    ->view('emails.restaurantChanged')
+                    ->view('emails.restaurantAccepted')
                     ->with([
-                        'updatedRestaurant' => $this->updatedRestaurant,
-                        'oldRestaurant' => $this->oldRestaurant,
+                        'restaurant' => $this->restaurant,
                         'manager' => $this->manager
                     ])
-                    ->subject('Restaurante modificado');
+                    ->subject('Su restaurante "' . $this->restaurant->name . '" ha sido aceptado!');
     }
 }

@@ -50,6 +50,24 @@
         .content ul li span {
             font-weight: bold;
         }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #006657;
+            color: #fff !important;
+            font-size: 24px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .content-button {
+            width: 100%;
+            height: fit-content;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -57,23 +75,13 @@
         <div class="header">
             <h1>TheFoot</h1>
         </div>
-        @php
-            $updatedAttributes = $updatedRestaurant->getAttributes();
-            $oldAttributes = $oldRestaurant->getAttributes();
-        @endphp
         <div class="content">
-            <h2>{{ $updatedRestaurant->name }}</h2>
-            <h5>Buenos días, {{ $manager }}.</h5>
-            <p>Se han realizado los siguientes cambios de este restaurante a su cargo:</p>
-            <ul>
-                @foreach($updatedAttributes as $key => $value)
-                    @if($key !== 'updated_at' && array_key_exists($key, $oldAttributes) && $value != $oldAttributes[$key])
-                        <li><span>{{ $key }}:</span> {{ $oldAttributes[$key] }} => {{ $value }}</li>
-                    @endif
-                @endforeach
-            </ul>
-            <br>
-            <p>Si ha recibido este correo por error o se han realizado cambios que no son de su agrado, por favor, accede a su gestor de restaurantes y realice una reclamación.</p>
+            <h2>Bienvenido, {{ $user->name }}.</h2>
+            <p>Gracias por registrarte en nuestra página. Aquí podrás encontrar una amplia selección de restaurantes y realizar tus pedidos de comida favorita.</p>
+            <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+            <div class="content-button">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" class="button">Acceder a la página</a>
+            </div>
         </div>
     </div>
 </body>

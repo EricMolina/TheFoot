@@ -57,23 +57,19 @@
         <div class="header">
             <h1>TheFoot</h1>
         </div>
-        @php
-            $updatedAttributes = $updatedRestaurant->getAttributes();
-            $oldAttributes = $oldRestaurant->getAttributes();
-        @endphp
         <div class="content">
-            <h2>{{ $updatedRestaurant->name }}</h2>
-            <h5>Buenos días, {{ $manager }}.</h5>
-            <p>Se han realizado los siguientes cambios de este restaurante a su cargo:</p>
+            <h2>{{ $restaurant->name }}</h2>
+            <h5> {{ $manager }}, ¡gracias por confiar en nosotros!</h5>
+            <p>Agradecemos mucho que hayas creado un restaurante en nuestro sistema. Pronto será revisado por un administrador y se verá si cumple con la normativa de nuestra empresa. ¡Mucha suerte y gracias!</p>
             <ul>
-                @foreach($updatedAttributes as $key => $value)
-                    @if($key !== 'updated_at' && array_key_exists($key, $oldAttributes) && $value != $oldAttributes[$key])
-                        <li><span>{{ $key }}:</span> {{ $oldAttributes[$key] }} => {{ $value }}</li>
-                    @endif
-                @endforeach
+                <li><span>Nombre:</span> {{ $restaurant->name }}</li>
+                <li><span>Descripción:</span> {{ $restaurant->description }}</li>
+                <li><span>Localización:</span> {{ $restaurant->location }}</li>
+                <li><span>Miniatura:</span> {{ $restaurant->thumbnail }}</li>
+                <li><span>Precio medio:</span> {{ $restaurant->average_price }}</li>
             </ul>
             <br>
-            <p>Si ha recibido este correo por error o se han realizado cambios que no son de su agrado, por favor, accede a su gestor de restaurantes y realice una reclamación.</p>
+            <p>Si ha recibido este correo por error o se ha creado un restaurante a su nombre sin permiso, por favor, accede a su gestor de restaurantes y realice una reclamación.</p>
         </div>
     </div>
 </body>

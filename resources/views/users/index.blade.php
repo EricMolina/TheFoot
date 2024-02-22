@@ -213,9 +213,6 @@
                                             let formData = new FormData(form);
                                             formData.append('id', id);
                                             formData.append("_method", "PUT");
-                                            //agregar los restaurantes
-                                            formData.append('updatedRestaurant', JSON.stringify(updatedRestaurant));
-                                            formData.append('oldRestaurant', JSON.stringify(oldRestaurant));
 
                                             // Perform form validation
                                             if (!validateForm()) {

@@ -10,35 +10,36 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RestaurantChanged;
 use App\Mail\RestaurantCreated;
-use App\Mail\RestaurantAccepted;
-use App\Mail\RestaurantRejected;
 
-class AdminRestaurantController extends Controller
+class ManagerRestaurantController extends Controller
 {
     public function list() {
-        $restaurants = Restaurant::with('manager')->get();
+        $myId = Auth::id();
+        $restaurants = Restaurant::with('manager')->where('manager_id', $myId)->get();
 
         return $restaurants;
     }
 
     public function show(Request $request) {
-        $restaurant = Restaurant::with('foodtypes')->with('images')->find($request->id);
+        $myId = Auth::id();
+        $restaurant = Restaurant::with('foodtypes')->with('images')->where('manager_id', $myId)->find($request->id);
 
         return $restaurant;
     }
 
     public function store(Request $request) {
+        $myId = Auth::id();
+
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
             'location' => 'required|max:255',
             'average_price' => 'required|integer',
-            'status' => 'required|integer',
-            'manager_id' => 'required|integer',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
@@ -59,8 +60,8 @@ class AdminRestaurantController extends Controller
             $restaurant->description = $request->description;
             $restaurant->location = $request->location;
             $restaurant->average_price = $request->average_price;
-            $restaurant->status = $request->status;
-            $restaurant->manager_id = $manager->id;
+            $restaurant->status = 0;
+            $restaurant->manager_id = $myId;
             $restaurant->thumbnail = $thumbnail_name;
             $restaurant->save();
     
@@ -86,7 +87,8 @@ class AdminRestaurantController extends Controller
             DB::commit();
 
             $newRestaurant = Restaurant::find($restaurant->id);
-            Mail::to($manager->email)->send(new RestaurantCreated($newRestaurant, $manager->name));
+            $user = User::find($myId);
+            Mail::to($user->email)->send(new RestaurantCreated($newRestaurant, $user->name));
     
             return "creado";
 
@@ -98,24 +100,24 @@ class AdminRestaurantController extends Controller
     }
 
     public function update(Request $request) {
+        $myId = Auth::id();
+
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
             'location' => 'required|max:255',
             'average_price' => 'required|integer',
-            'status' => 'required|integer',
-            'manager_id' => 'required|integer',
             'foodtypes' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
 
-            $restaurant = Restaurant::find($request->id);
+            $restaurant = Restaurant::find($request->id)->where('manager_id', $myId)->first();
 
-            $oldRestaurant = Restaurant::find($request->id);
+            $oldRestaurant = Restaurant::find($request->id)->where('manager_id', $myId)->first();
 
-            $manager = User::find($request->manager_id);
+            $manager = User::find($myId);
 
             // Update restaurant
             $restaurant->name = $request->name;
@@ -144,15 +146,8 @@ class AdminRestaurantController extends Controller
 
             DB::commit();
 
-            $updatedRestaurant = Restaurant::find($request->id);
-
-            if (($oldRestaurant->status == "0" || $oldRestaurant->status == "2") && $updatedRestaurant->status == "1")
-                Mail::to($manager->email)->send(new RestaurantAccepted($updatedRestaurant, $manager->name));
-            else if (($oldRestaurant->status == "0" || $oldRestaurant->status == "1") && $updatedRestaurant->status == "2")
-                Mail::to($manager->email)->send(new RestaurantRejected($updatedRestaurant, $manager->name));
-            else {
-                Mail::to($manager->email)->send(new RestaurantChanged($updatedRestaurant, $oldRestaurant, $manager->name));
-            }
+            $updatedRestaurant = Restaurant::find($request->id)->where('manager_id', $myId)->first();
+            Mail::to($manager->email)->send(new RestaurantChanged($updatedRestaurant, $oldRestaurant, $manager->name));
     
             return "modificado";
 
@@ -164,7 +159,12 @@ class AdminRestaurantController extends Controller
 
 
     public function destroy(Request $request) {
+        $myId = Auth::id();
         $id = $request->id;
+
+        if ($request->manager_id != $myId) {
+            return "error: Invalid manager ID";
+        }
 
         try {
             DB::beginTransaction();
@@ -236,6 +236,6 @@ class AdminRestaurantController extends Controller
 
     
     public function index() {
-        return view('restaurants.index');
+        return view('restaurants.managers_index');
     }
 }
