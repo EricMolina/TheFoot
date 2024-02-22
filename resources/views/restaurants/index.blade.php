@@ -18,7 +18,7 @@
         }
 
         .modal-height {
-            height: 750px;
+            height: 675px;
         }
 
         .images-container {
@@ -154,7 +154,7 @@
         }
 
         .restaurant-form form label {
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .restaurant-form .input-group {
@@ -166,11 +166,13 @@
         }
 
         .restaurant-form .input-group input {
+            height: 12px;
             width: 65%;
             padding: 5px 0px;
         }
 
         .restaurant-form .input-group select {
+            font-size: 15px;
             width: 65%;
             padding: 5px 0px;
         }
@@ -382,7 +384,6 @@
                             </div>
                             ` : ``}
                         
-                        <label>Foodtypes</label>
                         <div class="foodtypes-selector" id="foodtypes-container"></div>
     
                     </form>
@@ -405,7 +406,6 @@
 
             </div>`,
             width: id ? '1100px' : '540px',
-            customClass: 'modal-height',
             showCancelButton: true,
             confirmButtonText: id ? 'Editar' : 'Crear',
             confirmButtonColor: '#006657',
@@ -419,7 +419,7 @@
             },
             preConfirm: () => {
 
-                if (!validateRestaurantForm()) {
+                if (!validateRestaurantForm(id ? true : false)) {
                     return "";
                 }
 
@@ -433,14 +433,14 @@
     }
 
 
-    function validateRestaurantForm() {
+    function validateRestaurantForm(is_edit=false) {
         const name = document.getElementById('restaurant-name').value;
         const description = document.getElementById('restaurant-description').value;
         const location = document.getElementById('restaurant-location').value;
         const average_price = document.getElementById('restaurant-average_price').value;
         const manager_id = document.getElementById('restaurant-manager_id').value;
         const status = document.getElementById('restaurant-status').value;
-        const thumbnail = document.getElementById('thumbnail-input').files[0];
+        const foodtypes = document.querySelectorAll('.foodtype-item:checked')
 
         if (!name.trim()) {
             Swal.showValidationMessage("Introduce un nombre al restaurante");
@@ -464,6 +464,25 @@
         }
         if (!status.trim()) {
             Swal.showValidationMessage("Introduce un estado al restaurante");
+            return false;
+        }
+
+        if (!is_edit) {
+            const images = document.getElementById('restaurant-images-input').files;
+            const thumbnail = document.getElementById('thumbnail-input').files[0];
+
+            if (!thumbnail) {
+                Swal.showValidationMessage("Introduce una miniatura al restaurante");
+                return false;
+            }
+            if (images.length <= 0) {
+                Swal.showValidationMessage("Introduce alguna imagen al restaurante");
+                return false;
+            }
+        }
+
+        if (foodtypes.length <= 0) {
+            Swal.showValidationMessage("Selecciona mínimo un tipo de comida");
             return false;
         }
 
@@ -499,7 +518,7 @@
 
         foodtypes.forEach(foodtype => {
             foodtypesContainer.innerHTML += `<div>
-                    <input id="foodtypes-${foodtype.id}" type="checkbox" name="foodtypes[]" value="${foodtype.id}">
+                    <input class="foodtype-item" id="foodtypes-${foodtype.id}" type="checkbox" name="foodtypes[]" value="${foodtype.id}">
                     <label for="foodtypes-${foodtype.id}">${foodtype.name}</label>
                 </div>`;
         });
