@@ -1,11 +1,17 @@
 @extends('layouts.layout_search')
 @section('titulo','The Foot - Restaurantes')
-
 @section('regSection')
     <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <br>
 @endsection
-
+    <style>
+        .stars-container img {
+            filter: sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(100%);
+        }
+        .stars-container img:hover~img {
+            filter: sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(100%) !important;
+        }
+    </style>
 @section('filtro')
     {{-- <p style="float: left;">hola</p> --}}
     <div class="searchContainer">
@@ -27,18 +33,16 @@
     </select>
     {{-- <input type="number" name="" class="priceFilter" id="valoration" placeholder="nota min."> --}}
     <div class="stars-container priceFilter" id="valoration">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-filled starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
-        <img src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter star-empty starFilter">
-
-        
+        <img id="star-1" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-2" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-3" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-4" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-5" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-6" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-7" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-8" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-9" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
+        <img id="star-10" src="{{asset('img/half_star.png')}}" alt="" srcset="" class="starFilter starFilter">
     </div>
     <form class="priceFilter roboto-medium" id="orderBy">
         <p id="orderTxt">Ordenar por:</p>
@@ -74,6 +78,71 @@
     </div>
     <hr class="hrRes">
 {{-- Final del bloque --}}
+
+<script>
+    // Agregar el evento de clic a cada estrella
+    let starsPainted = [];
+        let stars = document.querySelectorAll('.stars-container img');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                changeScoreValue(this.id);
+                changeSiblingStyle(this);
+            });
+            star.addEventListener('mouseover', function() {
+                star.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(50%)';
+                let sibling = this.previousElementSibling;
+                while (sibling) {
+                    sibling.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(50%)';
+                    sibling = sibling.previousElementSibling;
+                }
+            });
+
+            star.addEventListener('mouseout', function() {
+                if (starsPainted.includes(star)) {
+                    star.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%)';
+                } else {
+                    star.style.filter = '';
+                }
+                let sibling = this.previousElementSibling;
+                while (sibling) {
+                    if (starsPainted.includes(sibling)) {
+                        sibling.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%)';
+                    } else {
+                        sibling.style.filter = '';
+                    }
+                    sibling = sibling.previousElementSibling;
+                }
+                sibling = this.nextElementSibling;
+                while (sibling) {
+                    if (starsPainted.includes(sibling)) {
+                        sibling.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%)';
+                    } else {
+                        sibling.style.filter = '';
+                    }
+                    sibling = sibling.nextElementSibling;
+                }
+            });
+        });
+
+        // Función para cambiar el valor del input "score" al hacer clic en una estrella
+        function changeScoreValue(starId) {
+            //et scoreInput = document.getElementById('score');
+            //scoreInput.value = starId.split('-')[1];
+        }
+
+        // Función para cambiar el estilo de los elementos hermanos de la estrella seleccionada
+        function changeSiblingStyle(star) {
+            starsPainted = [];
+            starsPainted.push(star);
+            star.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%)';
+            let sibling = star.previousElementSibling;
+            while (sibling) {
+                starsPainted.push(sibling);
+                sibling.style.filter = 'sepia(100%) hue-rotate(340deg) saturate(99999%)';
+                sibling = sibling.previousElementSibling;
+            }
+        }
+</script>
     
 @endsection
 @section('content')
