@@ -76,5 +76,3 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('crud/users', AdminUserController::class);    
 });
 //Auth::routes();
-
-
