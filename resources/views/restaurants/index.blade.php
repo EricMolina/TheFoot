@@ -1,286 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+@extends('layouts.layout_login')
+@section('titulo','The Foot - Registrarse')
+@section('regSection')
+    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <br>
+@endsection
+@section('slider')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         * {
             font-family: "Roboto", sans-serif;
             font-weight: 300;
             font-style: normal;
         }
-
-        td, tr {
-            border: 1px solid black;
-            padding: 5px 12px;
-        }
-
-        .modal-height {
-            height: 675px;
-        }
-
-        .images-container {
-            width: 90%;
-            height: 400px;
-            border: 1px solid black;
-            padding: 20px;
-            overflow-y: auto;
-            border-radius: 0.25em;
-            box-shadow: rgb(217, 217, 217) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset;
-        }
-
-        .images-container .images-container-flex {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .images-container::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .images-container::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        
-        .images-container::-webkit-scrollbar-thumb {
-            background: #006657;
-            border-radius: 0.25em;
-        }
-
-        .images-container .restaurant-image {
-            position: relative;
-            width: 205px;
-            height: 125px;
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgb(108, 108, 108);
-            border-radius: 0.25em;
-        }
-
-        .images-container a {
-            position: absolute;
-            top: 7px;
-            right: 7px;
-            background-color: white;
-            color: black;
-            padding: 3px 6px;
-            cursor: pointer;
-            border-radius: 100%;
-            font-size: 15px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-
-        .images-upload-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .images-upload-container .fake-file-input {
-            width: 50%;
-        }
-
-        .restaurant-form-images .images-btn {
-            background-color: #006657;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 0.25em;
-            text-decoration: none;
-            color: white;
-            font-size: 17px;
-        }
-
-        .restaurant-form-images .images-btn:hover {
-            background-color: hsl(174, 100%, 15%);
-        }
-
-        .images-container a:hover {
-            background-color: rgb(226, 226, 226);
-        }
-
-        .restaurant-form {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-        
-        .restaurant-form.two-columns .restaurant-form-info {
-            width: 50%;
-            float: left;
-        }
-
-        .restaurant-form-images {
-            width: 50%;
-            float: left;
-        }
-
-        .restaurant-form:not(.two-columns) {
-            gap: 0;
-        }
-
-        .restaurant-form:not(.two-columns) .restaurant-form-info {
-            display: flex;
-            justify-content: center;
-        }
-
-        .restaurant-form:not(.two-columns) .restaurant-form-images {
-            width: 0%;
-        }
-
-        .restaurant-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .restaurant-form form 
-        input[type="text"], 
-        input[type="number"] 
-        {
-            border: none;
-            border-bottom: 2px solid rgb(0, 0, 0);
-            background-color: rgba(255, 255, 255, 0);
-            color: rgb(0, 0, 0);
-            display: block;
-            font-size: 17px;
-            outline: none;
-        }
-
-        .restaurant-form form label {
-            font-size: 16px;
-        }
-
-        .restaurant-form .input-group {
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .restaurant-form .input-group input {
-            height: 12px;
-            width: 65%;
-            padding: 5px 0px;
-        }
-
-        .restaurant-form .input-group select {
-            font-size: 15px;
-            width: 65%;
-            padding: 5px 0px;
-        }
-
-        .restaurant-form:not(.two-columns) .input-group input {
-            width: 70%;
-        }
-
-        .restaurant-form:not(.two-columns) .input-group select {
-            width: 70%;
-        }
-
-        .restaurant-form .input-group select {
-            float: left;
-            margin-top: 1%;
-            margin-left: 1%;
-            padding: 5px 0px;
-            font-size: 17px;
-            border-style: solid;
-            border-width: 2px;
-            border-radius: 10px;
-            border-color: #d5d8dc;
-            background-color: white;
-        }
-        .restaurant-form .input-group select:hover{
-            border-color: #006399;
-            background-color: #f6f6f6;
-            color: #006399;
-        }
-        .restaurant-form .input-group select:focus{
-            border-color: #006399;
-            background-color: #f6f6f6;
-            color: #006399;
-            -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
-            -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
-            box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
-        }
-        .restaurant-form .input-group select>option{
-            color: black;
-        }
-
-        .restaurant-form .fake-file-input {
-            width: 65%;
-        }
-
-        .restaurant-form:not(.two-columns) .fake-file-input {
-            width: 70%;
-        }
-
-        .fake-file-input input {
-            display: none;
-        }
-
-        .fake-file-input label {
-            display: block;
-            width: 90%;
-            background-color: #006657;
-            padding: 7px 15px;
-            cursor: pointer;
-            border-radius: 0.25em;
-            color: white;
-            font-size: 17px;
-            text-overflow: ellipsis;
-            overflow: hidden; 
-            white-space: nowrap;
-        }
-
-        .fake-file-input label:hover {
-            background-color: hsl(174, 100%, 15%);
-        }
-
-        .restaurant-form .foodtypes-selector {
-            border: 1px solid black;
-            border-radius: 0.25em;
-            box-shadow: rgb(217, 217, 217) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset;
-            padding: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .restaurant-form .foodtypes-selector > div {
-            margin-bottom: 10px;
-        }
-
-        .restaurant-form .foodtypes-selector input {
-            display: none;
-        }
-
-        .restaurant-form .foodtypes-selector label {
-            border: 1px solid rgb(108, 108, 108);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 17px;
-            cursor: pointer;
-        }
-
-        .restaurant-form .foodtypes-selector input:checked ~ label {
-            background-color: rgb(108, 108, 108);
-            color: white;
+        label{
+            color: initial
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-    
+@endsection
+@section('content')
+
     <button onclick="displayRestaurantForm()" >Create</button><br><br>
 
     <table>
@@ -300,7 +38,6 @@
         </tbody>
     </table>
 
-</body>
 <script>
 
     function displayRestaurants(restaurants) {
@@ -325,8 +62,6 @@
             </tr>`;
         });
     }
-
-
     function displayRestaurantForm(id=null) {
         Swal.fire({
             title: id ? 'Editar restaurante' : 'Crear restaurante',
@@ -702,4 +437,4 @@
     getRestaurants();
 
 </script>
-</html>
+@endsection

@@ -31,7 +31,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     //Ruta default, los restaurantes
     Route::get('/', function () {
-        return view('restaurant');
+        return view('search');
     });
     //Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
 
