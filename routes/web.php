@@ -20,21 +20,19 @@ use App\Mail\RestaurantChanged;
 |
 */
 
-Route::get('/', function () {
-    return view('search');
-});
-
 Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-//Protegidas
+//Protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
-    //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
+    //Ruta default, los restaurantes
+    Route::get('/', function () {
+        return view('search');
+    });
+    //Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
 
     Route::controller(RestaurantController::class)->group(function () {
         

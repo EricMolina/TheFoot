@@ -1,4 +1,4 @@
-var file = document.getElementById("file");
+var file = document.getElementById("profile_image");
 var profilePreview = document.getElementById("profilePreview");
 file.addEventListener("change",()=>{getImg()})
 

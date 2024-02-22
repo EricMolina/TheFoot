@@ -2,7 +2,7 @@
 @section('titulo','The Foot - Restaurantes')
 
 @section('regSection')
-    <a href="" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <br>
 @endsection
 

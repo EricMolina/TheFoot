@@ -1,105 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-        @csrf
+@extends('layouts.layout_login')
 
-        <div class="row mb-3">
-            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+@section('titulo','The Foot - Registrarse')
+@section('regSection')
+    <a href="{{ Route('login')}}" id="regBtn" class="roboto-medium">INICIAR SESIÓN</a>
+    <br>
+@endsection
+@section('content')
+    <div id="logContainer">
+        <h1 id="loginTitle" class="roboto-bold text-align">Registrarse</h1>
+        <p class="text-align subTitule roboto-light-italic">Inicia sesión para descubrir y reservar el mejor restaurante</p>
+        <!-- FORM -->
 
-            <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-            <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-            <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-            <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
-
-            <div class="col-md-6">
-                <input id="profile_image" type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" accept="image/*">
-
-                @error('profile_image')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
-
-            <div class="col-md-6">
-                <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
-                    <option value="Client">Client</option>
-                    <option value="Manager">Manager</option>
-                </select>
-
-                @error('role')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-0">
-            <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Register') }}
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="loginForm">
+            @csrf
+            <div class="row">
+                <div class="column-3">
+                    <label for="name" class="roboto-black">Nombre de usuario</label>
+                    <br>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror logininput register" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="email" class="roboto-black">Correo electrónico</label>
+                    <br>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror logininput register" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="role" class="col-md-4 col-form-label text-md-end">Selecciona el rol que deseas</label>
+                    <br>
+                    <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
+                        <option value="Client">Client</option>
+                        <option value="Manager">Manager</option>
+                    </select>
+                    @error('role')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="column-3">
+                    <label for="password" class="roboto-black">Contraseña</label>
+                    <br>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror logininput register" name="password" required autocomplete="new-password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="password-confirm" class="roboto-black">Repite la contraseña</label>
+                    <br>
+                    <input id="password-confirm" type="password" class="form-control logininput register" name="password_confirmation" required autocomplete="new-password">
+                    <br>
+                </div>
+                <div class="column-3">
+                    <input id="profile_image" type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" accept="image/*">
+                    @error('profile_image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div id="imgContainer">
+                        <img src="" id="profilePreview" alt="" srcset="" height="100px" width="100px">
+                    </div>
+                </div>
+                <button type="submit" id="loginbtn">
+                    Registrarse
                 </button>
             </div>
-        </div>
-    </form>
-
-</body>
-</html>
+        </form>
+    <script src="{{asset("js/getImg.js")}}"></script>
+@endsection
