@@ -21,7 +21,7 @@ use App\Mail\RestaurantChanged;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('search');
 });
 
 Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
