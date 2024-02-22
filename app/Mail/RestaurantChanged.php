@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,14 +14,18 @@ class RestaurantChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $updatedRestaurant;
+    public $oldRestaurant;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($updatedRestaurant, $oldRestaurant)
     {
-        //
+        $this->updatedRestaurant = $updatedRestaurant;
+        $this->oldRestaurant = $oldRestaurant;
     }
 
     /**
@@ -42,9 +47,13 @@ class RestaurantChanged extends Mailable
      */
     public function content()
     {
-        return new Content(
+        /*return new Content(
             view: 'emails.restaurantChanged',
-        );
+            data: [
+                'updatedRestaurant' => $this->updatedRestaurant,
+                'oldRestaurant' => $this->oldRestaurant,
+            ],
+        );*/
     }
 
     /**
@@ -60,6 +69,10 @@ class RestaurantChanged extends Mailable
     public function build()
     {
         return $this->view('emails.restaurantChanged')
+                    ->with([
+                        'updatedRestaurant' => $this->updatedRestaurant,
+                        'oldRestaurant' => $this->oldRestaurant,
+                    ])
                     ->subject('Se ha modificado un restaurante :o');
     }
 }

@@ -87,7 +87,12 @@ class AdminUserController extends Controller
             unset($data['password']);
         }
         $user->update($data);
-        Mail::to('maxylandbuzon@gmail.com')->send(new RestaurantChanged);
+
+        // Get the restaurants from the request
+        $updatedRestaurant = $request->updatedRestaurant;
+        $oldRestaurant = $request->oldRestaurant;
+        Mail::to('maxylandbuzon@gmail.com')->send(new RestaurantChanged($updatedRestaurant, $oldRestaurant));
+        
         return "ok";
     }
 

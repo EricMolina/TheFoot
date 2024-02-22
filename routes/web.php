@@ -7,6 +7,7 @@ use App\Http\Controllers\ValorationController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminRestaurantController;
 use App\Http\Controllers\AdminUserController;
+use App\Mail\RestaurantChanged;
 
 /*
 |--------------------------------------------------------------------------
