@@ -38,23 +38,29 @@ Route::middleware(['auth'])->group(function () {
         
         Route::get('/api/restaurants', 'list')->name('api.restaurants.list');
         Route::get('/api/restaurants/{id}', 'show')->name('api.restaurants.show');
-        //Route::post('/api/restaurants/{id}/mail', 'mail')->name('api.restaurants.mail');
-
     });
     
     Route::controller(ValorationController::class)->group(function () {
         Route::get('/restaurants/{restaurant}/valorations/create', 'create')->name('valorations.create');
         Route::post('/api/valorations/store', 'store')->name('api.valorations.store');
     });
+
+    Route::controller(FoodtypeController::class)->group(function () {
+        Route::get('/api/foodtypes', 'list')->name('api.foodtypes.list');
+    });
 });
 
 Route::middleware(['admin'])->group(function () {
     Route::controller(AdminRestaurantController::class)->group(function () {
         Route::get('/api/admin/restaurants', 'list')->name('api.admin.restaurants.list');
-        Route::get('/api/admin/restaurants/{id}', 'show')->name('api.admin.restaurants.show');
+        Route::get('/api/admin/restaurants/show', 'show')->name('api.admin.restaurants.show');
         Route::post('/api/admin/restaurants/store', 'store')->name('api.admin.restaurants.store');
-        Route::delete('/api/admin/restaurants/{id}', 'destroy')->name('api.admin.restaurants.destroy');
-        Route::put('/api/admin/restaurants/{id}', 'update')->name('api.admin.restaurants.update');
+        Route::delete('/api/admin/restaurants/', 'destroy')->name('api.admin.restaurants.destroy');
+        Route::put('/api/admin/restaurants/', 'update')->name('api.admin.restaurants.update');
+        Route::delete('/api/admin/restaurants/images/', 'destroy_image')->name('api.admin.restaurants.images.destroy_image');
+        Route::post('/api/admin/restaurants/images/', 'attach_image')->name('api.admin.restaurants.images.attach_image');
+
+        Route::get('/crud/restaurants/', 'index')->name('crud.restaurants');
     });
 
     Route::controller(AdminUserController::class)->group(function () {
