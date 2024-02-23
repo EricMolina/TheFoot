@@ -19,18 +19,18 @@
 @endsection
 @section('content')
 
-    <button onclick="displayRestaurantForm()" >Create</button><br><br>
+    <button class="crudCreateBtn" onclick="displayRestaurantForm()" >Crear</button><br><br>
 
     <table>
         <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Ubicación</th>
-                <th>Precio medio</th>
-                <th>Gerente</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+            <tr class="tableHeader">
+                <th class="roboto-bold">Nombre</th>
+                <th class="roboto-bold">Descripción</th>
+                <th class="roboto-bold">Ubicación</th>
+                <th class="roboto-bold">Precio medio</th>
+                <th class="roboto-bold">Gerente</th>
+                <th class="roboto-bold">Estado</th>
+                <th class="roboto-bold">Acciones</th>
             </tr>
         </thead>
         <tbody id="restaurant-table">
@@ -56,8 +56,8 @@
                 <td>${restaurant.manager.name}</td>
                 <td>${restaurantStatus}</td>
                 <td>
-                    <button onclick="displayDeleteRestaurant(${restaurant.id})" >Eliminar</button>
-                    <button onclick="displayRestaurantForm(${restaurant.id})" >Editar</button>    
+                    <button class="crudDeleteBtn" onclick="displayDeleteRestaurant(${restaurant.id})" >Eliminar</button>
+                    <button class="crudEditBtn" onclick="displayRestaurantForm(${restaurant.id})" >Editar</button>    
                 </td>
             </tr>`;
         });
