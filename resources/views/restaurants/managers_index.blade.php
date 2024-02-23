@@ -1,8 +1,11 @@
 @extends('layouts.layout_search')
 
-@section('titulo','The Foot - Restaurantes')
+@section('titulo','The Foot - Mis restaurantes')
 @section('regSection')
     <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    @if(Auth::User()->role == 'Manager')
+        <a href="{{ Route('home')}}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
+    @endif
     <br>
 @endsection
 @section('content')
@@ -12,27 +15,10 @@
 <br>
 <button class="btn-primary" style="margin-left: 40px;" onclick="displayRestaurantForm()" >Crear nuevo restaurante</button>
 <br><br><br>
-{{-- Inicio del bloque del restaurante --}}
-    <div class="resContainer row">
-        <div class="col-res1"><img src="___" alt="" srcset="" class="thumbnail"></div>
-        <div class="col-res2">
-            <h2 class="roboto-bold titleRes">Nombre: ___</h2>
-            <p class="roboto-light-italic">Estado: <span>___</span></p>
-            <p class="roboto-light-italic">Dirección: ___</p>
-            <p class="roboto-light-italic">Precio medio: <span>___</span></p>
-            <p class="roboto-light-italic">Descripción: ___</p>
-            <span class="roboto-bold">Tipos de comida: </span>
-            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon_">
-            <img src="{{asset('img/icons/food/bowl.svg')}}" class="resIcon_">
-        </div>
-        <div class="col-res3">
-            <br>
-            <button class="btn-primary" onclick="displayRestaurantForm(___)">Editar</button>
-            <br><br>
-            <button class="btn-primary" onclick="displayDeleteRestaurant(___)">Eliminar</button>
-        </div>
-    </div>
-    <hr class="hrRes">
+<div id="restaurant-table">
+
+</div>
+
     
 @endsection
 
@@ -336,17 +322,31 @@
             let restaurantStatus = restaurant.status == 0 ? 'Pendiente' :
                                     restaurant.status == 1 ? 'Aprobado' : 'Rechazado';
 
-            restaurantTable.innerHTML += `<tr>
-                <td>${restaurant.name}</td>
-                <td>${restaurant.description}</td>
-                <td>${restaurant.location}</td>
-                <td>${restaurant.average_price}</td>
-                <td>${restaurantStatus}</td>
-                <td>
-                    <button onclick="displayDeleteRestaurant(${restaurant.id})" >Eliminar</button>
-                    <button onclick="displayRestaurantForm(${restaurant.id})" >Editar</button>    
-                </td>
-            </tr>`;
+            let restaurantHTML = `
+            <div class="resContainer row">
+                <div class="col-res1"><img src="{{ asset('images/thumbnails/') }}/${restaurant.thumbnail}" alt="" srcset="" class="thumbnail"></div>
+                <div class="col-res2">
+                    <h2 class="roboto-bold titleRes">Nombre: ${restaurant.name}</h2>
+                    <p class="roboto-light-italic">Estado: <span>${restaurantStatus}</span></p>
+                    <p class="roboto-light-italic">Dirección: ${restaurant.location}</p>
+                    <p class="roboto-light-italic">Precio medio: <span>${restaurant.average_price}</span></p>
+                    <p class="roboto-light-italic">Descripción: ${restaurant.description}</p>
+                    <span class="roboto-bold">Tipos de comida: </span>`;
+            restaurant.foodtypes.forEach(foodtype => {
+                restaurantHTML += `
+                <img src="{{asset('img/icons/food/')}}/${foodtype.icon}" class="resIcon_">`;
+            });
+            restaurantHTML += `
+                </div>
+                <div class="col-res3">
+                    <br>
+                    <button class="btn-primary" onclick="displayRestaurantForm(${restaurant.id})">Editar</button>
+                    <br><br>
+                    <button class="btn-primary" onclick="displayDeleteRestaurant(${restaurant.id})">Eliminar</button>
+                </div>
+            </div>
+            <hr class="hrRes">`;
+            restaurantTable.innerHTML += restaurantHTML;
         });
     }
 
@@ -695,8 +695,9 @@
         document.getElementById(`${input}-label`).innerText = `${inputCount} files selected`;
     }
 
-
-    getRestaurants();
+    window.onload = function () {
+        getRestaurants();
+    }
 
 </script>
 </html>

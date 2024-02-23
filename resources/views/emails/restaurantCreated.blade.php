@@ -65,7 +65,7 @@
                 <li><span>Nombre:</span> {{ $restaurant->name }}</li>
                 <li><span>Descripción:</span> {{ $restaurant->description }}</li>
                 <li><span>Localización:</span> {{ $restaurant->location }}</li>
-                <li><span>Miniatura:</span> {{ $restaurant->thumbnail }}</li>
+                <li><span>Portada:</span> {{ $restaurant->thumbnail }}</li>
                 <li><span>Precio medio:</span> {{ $restaurant->average_price }}</li>
             </ul>
             <br>

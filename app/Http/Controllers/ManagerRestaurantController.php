@@ -20,7 +20,7 @@ class ManagerRestaurantController extends Controller
 {
     public function list() {
         $myId = Auth::id();
-        $restaurants = Restaurant::with('manager')->where('manager_id', $myId)->get();
+        $restaurants = Restaurant::with('manager')->with('foodtypes')->where('manager_id', $myId)->get();
 
         return $restaurants;
     }
@@ -162,7 +162,7 @@ class ManagerRestaurantController extends Controller
         $myId = Auth::id();
         $id = $request->id;
 
-        if ($request->manager_id != $myId) {
+        if (Restaurant::find($request->id)->manager_id != $myId) {
             return "error: Invalid manager ID";
         }
 

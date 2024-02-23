@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     //Ruta default, los restaurantes
     Route::get('/', function () {
         return view('search');
-    });
+    })->name('home');
     //Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
 
     Route::controller(RestaurantController::class)->group(function () {
