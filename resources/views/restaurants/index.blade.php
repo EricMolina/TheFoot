@@ -1,5 +1,5 @@
 @extends('layouts.layout_login')
-@section('titulo','The Foot - Registrarse')
+@section('titulo','Restaurantes')
 @section('regSection')
     <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <br>
@@ -18,7 +18,7 @@
     </style>
 @endsection
 @section('content')
-
+<h1 class="crudTitle">Restaurantes</h1>
     <button class="crudCreateBtn" onclick="displayRestaurantForm()" >Crear</button><br><br>
 
     <table>

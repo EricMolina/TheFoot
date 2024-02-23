@@ -8,7 +8,7 @@
 @section('content')
     <div id="regContainer">
         <h1 id="loginTitle" class="roboto-bold text-align">Registrarse</h1>
-        <p class="text-align subTitule roboto-light-italic">Inicia sesión para descubrir y reservar el mejor restaurante</p>
+        {{-- <p class="text-align subTitule roboto-light-italic">Inicia sesión para descubrir y reservar el mejor restaurante</p> --}}
         <!-- FORM -->
 
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="loginForm">
@@ -20,7 +20,7 @@
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror logininput register" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     @error('name')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="errorMsg">{{ $message }}</strong>
                         </span>
                     @enderror
                     <br>
@@ -29,7 +29,7 @@
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror logininput register" name="email" value="{{ old('email') }}" required autocomplete="email">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="errorMsg">{{ $message }}</strong>
                         </span>
                     @enderror
                     <br>
@@ -41,7 +41,7 @@
                     </select>
                     @error('role')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="errorMsg">{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
@@ -51,7 +51,7 @@
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror logininput register" name="password" required autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="errorMsg">{{ $message }}</strong>
                         </span>
                     @enderror
                     <br>
@@ -65,7 +65,7 @@
                     <input id="profile_image" type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" accept="image/*">
                     @error('profile_image')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="errorMsg">{{ $message }}</strong>
                         </span>
                     @enderror
                     <div id="imgContainer">

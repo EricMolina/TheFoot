@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.layout_login')
+@section('titulo','Usuarios')
+@section('regSection')
+    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <br>
+@endsection
+@section('slider')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Document</title>
     <style>
-        table {
+        * {
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+        label{
+            color: initial
+        }
+        /* table {
             width: 100%;
             border-collapse: collapse;
-        }
-        th, td {
+        } */
+        /* th, td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
@@ -25,22 +33,23 @@
         td img {
             widows: 100px;
             height: 100px;
-        }
+        } */
     </style>
-</head>
-<body>
-    <h1>Crud usuarios</h1>
-    <a href="#" onclick="createUser()">Crear nuevo usuario</a>
+@endsection
+@section('content')
+<h1 class="crudTitle">Usuarios</h1>
+    <button class="crudCreateBtn" href="#" onclick="createUser()">Crear</button>
+    <br>
     <br>
     <table>
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Profile Image</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+            <tr class="tableHeader">
+                <th class="roboto-bold">Name</th>
+                <th class="roboto-bold">Email</th>
+                <th class="roboto-bold">Role</th>
+                <th class="roboto-bold">Profile Image</th>
+                <th class="roboto-bold">Acciones</th>
+                {{-- <th class="roboto-bold">Eliminar</th> --}}
             </tr>
         </thead>
         <tbody id="userList">
@@ -65,8 +74,7 @@
                                                     <td>${user.email}</td>
                                                     <td>${user.role}</td>
                                                     <td><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image"></td>
-                                                    <td><button onclick="editUser(${user.id})">Editar</button></td>
-                                                    <td><button onclick="deleteUser(${user.id})">Eliminar</button></td>
+                                                    <td><button class="UserCrudDeleteBtn" onclick="deleteUser(${user.id})">Eliminar</button></br><button class="UserCrudEditBtn" onclick="editUser(${user.id})">Editar</button></td>
                                                 </tr>
                                             `;
                                         });
@@ -280,5 +288,4 @@
                                 return true;
                             }
                         </script>
-                    </body>
-                    </html>
+@endsection
