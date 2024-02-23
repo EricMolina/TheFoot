@@ -13,7 +13,7 @@ En este repositorio de gitHub está nuestra pagina web del proyecto 3 que consis
 
 ## Instalación del proyecto
 
-**Este tutorial da por hecho que ya se tiene instalado composer**
+**_Este tutorial da por hecho que ya se tiene instalado composer_**
 
 Empezaremos descargando el repositorio de git hub
 
@@ -54,7 +54,7 @@ Como hemos mencionado anteriormente para poder visualizar el contenido de la pag
 * ricard.casals@gmail.com
   - Administrador
 
-**En todos los casos la contraseña siempre es asdASD123**
+**_En todos los casos la contraseña siempre es asdASD123_**
 
 Aparte de estas credenciales tambien existe una cuenta de correo real que es la que se utilizará para notificar a los usuarios, las credenciales son las siguientes:
 
@@ -68,4 +68,11 @@ Para controlar que los usuarios solo puedan acceder a secciones que le correspon
 * **Cliente:** Pueden buscar restaurantes y valorarlos.
 * **Managers:** Pueden buscar restaurantes, valorarlos y a demás gestionan su propio restaurante.
 * **Administradores:** Pueden buscar restaurantes, valorarlos y a demás tienen acceso a los CRUDs para gestionar restaurantes y usuarios.
+
+**Por defecto cuando se crea un usuario este tiene el rol de cliente y es el administrador el que se encargará de modificarlo**
+
+## Diagrama de la Base de datos
+
+![image](https://github.com/EricMolina/TheFoot/assets/91189374/cde0b9c2-c138-446c-95f2-f4477d72ebe2)
+
   
