@@ -88,7 +88,9 @@
 
                         <div class="input-group">
                             <label>Gerente</label>
-                            <input id="restaurant-manager_id" type="number" name="manager_id" placeholder="manager_id">
+                            <select id="restaurant-manager_id" name="manager_id">
+                                <option disabled selected value="">Selecciona un manager</option>
+                            </select>
                         </div>
 
                         <div class="input-group">
@@ -150,6 +152,7 @@
                     getRestaurant(id);
                 } else {
                     getFoodtypes();
+                    getManagers();
                 }
             },
             preConfirm: () => {
@@ -242,7 +245,15 @@
             restaurant.foodtypes.forEach(foodtype => {
                 document.getElementById(`foodtypes-${foodtype.id}`).checked = true;
             });
-        })
+        });
+
+        fetch("{{ route('api.admin.users.managers') }}")
+        .then((res) => res.text())
+        .then((responseText) => {
+            let managers = JSON.parse(responseText);
+            displayManagers(managers);
+            document.getElementById(`manager-${restaurant.manager_id}`).selected = true;
+        });
 
         displayRestaurantImages(restaurant.images);
     }
@@ -256,6 +267,15 @@
                     <input class="foodtype-item" id="foodtypes-${foodtype.id}" type="checkbox" name="foodtypes[]" value="${foodtype.id}">
                     <label for="foodtypes-${foodtype.id}">${foodtype.name}</label>
                 </div>`;
+        });
+    }
+
+    function displayManagers(managers) {
+        let managersContainer = document.getElementById('restaurant-manager_id');
+
+        managers.forEach(manager => {
+            managersContainer.innerHTML += `
+            <option id="manager-${manager.id}" value="${manager.id}">${manager.name}</option>`;
         });
     }
 
@@ -298,6 +318,15 @@
         .then((responseText) => {
             let foodtypes = JSON.parse(responseText);
             displayFoodtypes(foodtypes);
+        })
+    }
+
+    function getManagers() {
+        fetch("{{ route('api.admin.users.managers') }}")
+        .then((res) => res.text())
+        .then((responseText) => {
+            let managers = JSON.parse(responseText);
+            displayManagers(managers);
         })
     }
 
