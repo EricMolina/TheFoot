@@ -303,11 +303,20 @@
         margin-left: 2%;
     }
     .btn-primary {
-        background-color: rgb(243, 243, 243);
-        padding: 8px 16px;
+        background-color: #006657;
+        padding: 10px 20px;
         height: fit-content;
-        font-size: 16px;
-        cursor: pointer
+        font-size: 18px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+    .btn-primary:hover {
+        background-color: #004d41;
+    }
+    .resContainer {
+        padding: 20px;
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
