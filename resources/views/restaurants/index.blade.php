@@ -35,8 +35,8 @@
         <thead>
             <tr class="tableHeader">
                 <th class="roboto-bold">Nombre</th>
-                <th class="roboto-bold">Descripción</th>
-                <th class="roboto-bold">Ubicación</th>
+                <th class="roboto-bold respHidden">Descripción</th>
+                <th class="roboto-bold respHidden">Ubicación</th>
                 <th class="roboto-bold">Precio medio</th>
                 <th class="roboto-bold">Gerente</th>
                 <th class="roboto-bold">Estado</th>
@@ -59,8 +59,8 @@
 
                 restaurantTable.innerHTML += `<tr>
                 <td>${restaurant.name}</td>
-                <td>${restaurant.description}</td>
-                <td>${restaurant.location}</td>
+                <td class="respHidden">${restaurant.description}</td>
+                <td class="respHidden">${restaurant.location}</td>
                 <td>${restaurant.average_price}</td>
                 <td>${restaurant.manager ? restaurant.manager.name : ''}</td>
                 <td>${restaurantStatus}</td>

@@ -88,7 +88,6 @@
         <div id="valorations-container">
 
         </div>
-        <hr class="hrMain">
         {{-- Fin del comentario --}}
 
     </div>
@@ -254,9 +253,8 @@
                         <img src="{{ asset('img/carousel2.jpg') }}" class="profilePic">
                         <p class="roboto-bold userOp">${valoration.user.name}</p>
                         <p class="roboto-light-italic dateOp">${valorationDate}</p>
-                        <br>
                         <p class="op roboto-medium-italic">${valoration.comment}</p>
-                    </div><br>`;
+                    </div><hr class="hrRes"><br>`;
 
                 valorationsContainer.innerHTML += valorationElement;
             });

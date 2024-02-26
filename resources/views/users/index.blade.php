@@ -244,10 +244,10 @@
         <table>
             <thead>
                 <tr class="tableHeader">
-                    <th class="roboto-bold">Name</th>
+                    <th class="roboto-bold respHidden">Name</th>
                     <th class="roboto-bold">Email</th>
                     <th class="roboto-bold">Role</th>
-                    <th class="roboto-bold">Profile Image</th>
+                    <th class="roboto-bold respHidden">Profile Image</th>
                     <th class="roboto-bold">Acciones</th>
                     {{-- <th class="roboto-bold">Eliminar</th> --}}
                 </tr>
@@ -270,10 +270,10 @@
                         data.forEach(user => {
                             userList.innerHTML += `
                                                 <tr>
-                                                    <td>${user.name}</td>
+                                                    <td class="respHidden">${user.name}</td>
                                                     <td>${user.email}</td>
                                                     <td>${user.role}</td>
-                                                    <td><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image" class="profilePicCrud"></td>
+                                                    <td class="respHidden"><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image" class="profilePicCrud"></td>
                                                     <td><button class="UserCrudDeleteBtn" onclick="deleteUser(${user.id})">Eliminar</button></br><button class="UserCrudEditBtn" onclick="editUser(${user.id})">Editar</button></td>
                                                 </tr>
                                             `;

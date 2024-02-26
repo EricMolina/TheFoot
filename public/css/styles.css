@@ -1304,6 +1304,27 @@ tr:hover {
   .column-3{
     width: 100%;
   }
+  /* CRUD */
+  .respHidden{
+    display: none;
+  }
+  .UserCrudDeleteBtn{
+    font-size: 12px;
+    margin-left: 14%;
+  }
+  .UserCrudEditBtn{
+    font-size: 12px;
+    margin-left: 25%;
+  }
+  .crudCreateBtn{
+    width: 90%;
+  }
+  .crudDeleteBtn{
+    margin-left: 3%;
+  }
+  .crudEditBtn{
+    margin-left: 15%;
+  }
 }
 
 #addBtn {
