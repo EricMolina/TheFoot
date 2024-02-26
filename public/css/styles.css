@@ -474,7 +474,7 @@ label{
 .scoreText{
   margin: 0%;
   padding: 0%;
-  margin-left: 50%;
+  margin-left: 40%;
 }
 .commText{
   margin-top: 0%;
@@ -667,6 +667,7 @@ label{
   border-radius: 5px;
   padding: 1%;
   display: none;
+  margin-top: 0%;
 }
 .commentBox{
   resize: none;
@@ -686,6 +687,13 @@ label{
   width: 70px;
   height: 70px;
   border-radius: 50px;
+  margin-right: 2%;
+}
+.profilePicCrud{
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin-left: 35%;
   margin-right: 2%;
 }
 .userOp{

@@ -273,7 +273,7 @@
                                                     <td>${user.name}</td>
                                                     <td>${user.email}</td>
                                                     <td>${user.role}</td>
-                                                    <td><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image"></td>
+                                                    <td><img src="{{ asset('images/profiles') }}/${user.profile_image}" alt="Profile Image" class="profilePicCrud"></td>
                                                     <td><button class="UserCrudDeleteBtn" onclick="deleteUser(${user.id})">Eliminar</button></br><button class="UserCrudEditBtn" onclick="editUser(${user.id})">Editar</button></td>
                                                 </tr>
                                             `;
