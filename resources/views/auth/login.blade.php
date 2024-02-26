@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-
-
-
-
 @extends('layouts.layout_login')
 
 @section('titulo','The Foot - Login')
@@ -32,11 +16,6 @@
 
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror logininput" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-            @error('email')
-                <span class="invalid-feedback roboto-black" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
             <br>
             <label for="password" class="col-md-4 col-form-label text-md-end roboto-black">Contraseña</label>
 
@@ -46,6 +25,11 @@
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
+            @enderror
+            @error('email')
+            <span class="invalid-feedback roboto-black" role="alert">
+                <strong class="errorMsg">{{ $message }}</strong>
+            </span>
             @enderror
             <br>
             <button type="submit" class="btn btn-primary" id="loginbtn">
