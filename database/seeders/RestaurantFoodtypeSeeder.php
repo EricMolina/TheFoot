@@ -16,21 +16,15 @@ class RestaurantFoodtypeSeeder extends Seeder
      */
     public function run()
     {
-        $restaurant1 = Restaurant::where('name', "Pizzeria Alberto's")->first();
-        $restaurant2 = Restaurant::where('name', "Salchipapa de l'esquina")->first();
+        $restaurants = Restaurant::all();
 
-        $italiana = Foodtype::where('name', 'Italiana')->first();
-        $japonesa = Foodtype::where('name', 'Japonesa')->first();
-        $kebab = Foodtype::where('name', 'Kebab')->first();
-        $vegana = Foodtype::where('name', 'Vegana')->first();
-        $griega = Foodtype::where('name', 'Griega')->first();
-        $china = Foodtype::where('name', 'China')->first();
-        $turca = Foodtype::where('name', 'Turca')->first();
-        $colombiana = Foodtype::where('name', 'Colombiana')->first();
-        $venezolana = Foodtype::where('name', 'Venezolana')->first();
-        $tailandesa = Foodtype::where('name', 'Tailandesa')->first();
+        foreach ($restaurants as $restaurant) {
 
-        $restaurant1->foodtypes()->attach([$italiana->id, $japonesa->id]);
-        $restaurant2->foodtypes()->attach([$kebab->id, $vegana->id]);
+            $food1 = Foodtype::find(rand(1, 10));
+            $food2 = Foodtype::find(rand(1, 10));
+
+            $restaurant->foodtypes()->attach([$food1->id, $food2->id]);
+
+        }
     }
 }

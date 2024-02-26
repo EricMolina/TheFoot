@@ -18,7 +18,7 @@ class ValorationSeeder extends Seeder
     public function run()
     {
         $restaurant1 = Restaurant::where('name', "Pizzeria Alberto's")->first();
-        $restaurant2 = Restaurant::where('name', "Salchipapa de l'esquina")->first();
+        $restaurant2 = Restaurant::where('name', "Catalunya Pita House")->first();
 
         $user1 = User::where('name', "eric.molina")->first();
         $user2 = User::where('name', "jorge.alcalde")->first();

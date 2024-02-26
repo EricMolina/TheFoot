@@ -20,21 +20,13 @@ class RestaurantSeeder extends Seeder
         $user2 = User::where('name', "pepe.viyuela")->first();
 
         Restaurant::create([
-            'name' => "Pizzeria Alberto's",
-            'description' => "Pizzeria italiana con clases de PHP",
-            'location' => "Bellvitge, L'Hospitalet de Llobregat, Barcelona",
-            'average_price' => 175,
-            'status' => 1,
-            'manager_id' => $user1->id
-        ]);
-
-        Restaurant::create([
-            'name' => "Salchipapa de l'esquina",
+            'name' => "Catalunya Pita House",
             'description' => "Les mejores papes con salchiches de tota barça",
-            'location' => "El Raval, Barcelona",
+            'location' => "Bellvitge, L'Hospitalet de Llobregat, Barcelona",
             'average_price' => 12,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example2.jpg'
         ]);
 
         Restaurant::create([
@@ -43,7 +35,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Gràcia, Barcelona",
             'average_price' => 30,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example3.jpg'
         ]);
         
         Restaurant::create([
@@ -52,7 +45,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Barceloneta, Barcelona",
             'average_price' => 40,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example4.jpg'
         ]);
         
         Restaurant::create([
@@ -61,7 +55,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Eixample, Barcelona",
             'average_price' => 15,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example5.jpg'
         ]);
         
         Restaurant::create([
@@ -70,7 +65,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Sant Gervasi, Barcelona",
             'average_price' => 80,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example6.jpg'
         ]);
         
         Restaurant::create([
@@ -79,7 +75,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Sants, Barcelona",
             'average_price' => 20,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example7.jpg'
         ]);
         
         Restaurant::create([
@@ -88,7 +85,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Les Corts, Barcelona",
             'average_price' => 35,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example8.jpg'
         ]);
         
         Restaurant::create([
@@ -97,7 +95,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Poble Sec, Barcelona",
             'average_price' => 30,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example9.jpg'
         ]);
         
         Restaurant::create([
@@ -106,7 +105,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Sarrià, Barcelona",
             'average_price' => 25,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example10.jpg'
         ]);
         
         Restaurant::create([
@@ -115,7 +115,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Barceloneta, Barcelona",
             'average_price' => 40,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example11.jpg'
         ]);
         
         Restaurant::create([
@@ -124,7 +125,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Eixample, Barcelona",
             'average_price' => 30,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example12.jpg'
         ]);
         
         Restaurant::create([
@@ -133,7 +135,8 @@ class RestaurantSeeder extends Seeder
             'location' => "Gràcia, Barcelona",
             'average_price' => 20,
             'status' => 1,
-            'manager_id' => $user1->id
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example13.jpg'
         ]);
         
         Restaurant::create([
@@ -142,7 +145,18 @@ class RestaurantSeeder extends Seeder
             'location' => "El Born, Barcelona",
             'average_price' => 35,
             'status' => 1,
-            'manager_id' => $user2->id
+            'manager_id' => $user2->id,
+            'thumbnail' => 'example14.jpg'
+        ]);
+
+        Restaurant::create([
+            'name' => "Pizzeria Alberto's",
+            'description' => "Pizzeria italiana con clases de PHP",
+            'location' => "Bellvitge, L'Hospitalet de Llobregat, Barcelona",
+            'average_price' => 175,
+            'status' => 1,
+            'manager_id' => $user1->id,
+            'thumbnail' => 'example1.png'
         ]);
     }
 }
