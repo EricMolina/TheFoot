@@ -787,3 +787,49 @@ label{
     height: 18.2vh;
   }
 }
+
+#addBtn {
+  background-color: #006657;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 17px;
+  padding: 5px 10px;
+  border: none;
+}
+
+#addBtn:hover {
+  background-color: #005145;
+  cursor: pointer;
+}
+
+.stars-container-iteractable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  filter: drop-shadow(0 3px 1px rgba(0, 0, 0, 0.455));
+}
+
+.stars-container-iteractable img {
+  width: auto;
+  height: 50px;
+  cursor: pointer;
+  filter: sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(100%);
+  padding: 0;
+  margin: 0;
+}
+
+.stars-container-iteractable img:nth-child(2n) {
+  transform: rotateY(180deg);
+}
+
+.stars-container-iteractable img:hover~img {
+  filter: sepia(100%) hue-rotate(340deg) saturate(99999%) grayscale(100%) !important;
+}
