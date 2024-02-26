@@ -3,16 +3,19 @@
 @section('regSection')
     
     <div class="row" style="height: 20px">
+        <span id="regBtn" class="roboto-medium">Bienviendo, {{ Auth::User()->name }}</span>
+        
         <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
-    
+        
         @if(Auth::User()->role == 'Manager')         
-            <a href="{{ Route('myrestaurants')}}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
+        <a href="{{ Route('myrestaurants')}}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
         @else
-            @if(Auth::User()->role == 'Administrator')         
-                <a href="{{ Route('crud.restaurants')}}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>            
-                <a href="{{ Route('crud.users')}}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>            
-            @endif
+        @if(Auth::User()->role == 'Administrator')         
+        <a href="{{ Route('crud.restaurants')}}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>            
+        <a href="{{ Route('crud.users')}}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>            
         @endif
+        @endif
+        <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
     
         <br>
     </div>

@@ -1,8 +1,8 @@
 @extends('layouts.layout_login')
 @section('titulo', 'Usuarios - CRUD')
 @section('regSection')
+    <span id="regBtn" class="roboto-medium">Bienviendo, {{ Auth::User()->name }}</span>
     <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
-    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
     @if (Auth::User()->role == 'Manager')
         <a href="{{ Route('myrestaurants') }}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
     @else
@@ -11,6 +11,7 @@
             <a href="{{ Route('crud.users') }}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>
         @endif
     @endif
+    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
     <br>
 @endsection
 @section('slider')

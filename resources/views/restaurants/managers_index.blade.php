@@ -2,8 +2,8 @@
 
 @section('titulo', 'The Foot - Mis restaurantes')
 @section('regSection')
+    <span id="regBtn" class="roboto-medium">Bienviendo, {{ Auth::User()->name }}</span>
     <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
-    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
     @if (Auth::User()->role == 'Manager')
         <a href="{{ Route('myrestaurants') }}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
     @else
@@ -12,6 +12,7 @@
             <a href="{{ Route('crud.users') }}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>
         @endif
     @endif
+    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
     <br>
 @endsection
 @section('content')
@@ -299,6 +300,10 @@
 
     label {
         color: black !important;
+    }
+
+    input:checked ~ label {
+        color: white !important;
     }
 
     input {
