@@ -130,7 +130,7 @@
         // Función para cambiar el valor del input "score" al hacer clic en una estrella
         function changeScoreValue(starId) {
             let scoreInput = document.getElementById('valoration');
-            scoreInput.value = starId.split('-')[1] / 2;
+            scoreInput.value = starId.split('-')[1];
             getRestaurants()
         }
 
@@ -153,7 +153,6 @@
             restaurantList.innerHTML = '';
             
             restaurants.forEach(restaurant => {
-                console.log(restaurant.valorations_avg_score / 2)
                 let avg_score = (Math.round((restaurant.valorations_avg_score / 2) * 100) / 100).toFixed(2);
                 
                 restaurantList.innerHTML += `
