@@ -45,25 +45,25 @@ Si todo ha ido bien veremos la siguiente pagina:
 
 ## Credenciales de inicio de sesión
 
-Como hemos mencionado anteriormente para poder visualizar el contenido de la pagina web primero hay que iniciar sesión en la pagina, para eso hemos creado un par de usuarios con distintos roles para poder testear todas las funcionalidades de la pagina web.
+Como hemos mencionado anteriormente para poder visualizar el contenido de la pagina web, primero hay que iniciar sesión en la página. Para eso, hemos creado un par de usuarios con distintos roles para poder testear todas las funcionalidades de la pagina web.
 
-* eric.molina@gmail.com
+* emolina@gmail.com
   - Cliente
-* jorge.alcalde@gmail.com
+* jalcalde@gmail.com
   - Manager
-* ricard.casals@gmail.com
+* rcasals@gmail.com
   - Administrador
 
-**_En todos los casos la contraseña siempre es asdASD123_**
+**_En todos los casos la contraseña siempre es: asdASD123_**
 
-Aparte de estas credenciales tambien existe una cuenta de correo real que es la que se utilizará para notificar a los usuarios, las credenciales son las siguientes:
+A parte de estas credenciales, también existe una cuenta de correo real con la que se utilizará para notificar a los usuarios. Sus credenciales son las siguientes:
 
 * **Correo:** thefoot.noreply@gmail.com
 * **Contraseña:** Vjva;D92Q7b&My`7
 
 ### Tipos de usuarios
 
-Para controlar que los usuarios solo puedan acceder a secciones que le corresponden hemos creado 3 tipos de usuarios los cuales tienen funcionalidades distintas
+Para controlar que los usuarios solo puedan acceder a secciones que le corresponden, hemos creado 3 tipos de usuarios, los cuales tienen funcionalidades distintas:
 
 * **Cliente:** Pueden buscar restaurantes y valorarlos.
 * **Managers:** Pueden buscar restaurantes, valorarlos y a demás gestionan su propio restaurante.
