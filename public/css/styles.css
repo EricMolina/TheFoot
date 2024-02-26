@@ -233,6 +233,9 @@ label{
 #respLogin{
   display: none;
 }
+.respIcon{
+  display: none;
+}
 /* Search */
 .searchContainer{
   margin-top: .7%;
@@ -1324,6 +1327,13 @@ tr:hover {
   }
   .crudEditBtn{
     margin-left: 15%;
+  }
+  .respIcon{
+    display: block;
+    width: 5%;
+    float: right;
+    margin-right: 3%;
+    margin-top: 5%;
   }
 }
 
