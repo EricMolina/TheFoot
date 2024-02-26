@@ -3,6 +3,7 @@
 @section('titulo','The Foot - Login')
 @section('regSection')
     <a href="{{ Route('register')}}" id="regBtn" class="roboto-medium">REGISTRARSE</a>
+    <a href="{{ Route('register')}}"><img src="{{ asset('img/respLogin.svg') }}" alt="" srcset="" id="respLogin"></a>
     <br>
 @endsection
 @section('content')

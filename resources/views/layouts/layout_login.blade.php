@@ -16,8 +16,7 @@
 <body>
     @yield('regSection')
     <div id="menuContriner">
-        <img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo">
-        <img src="{{ asset('img/respLogin.svg') }}" alt="" srcset="" id="respLogin">
+        <a href="{{ Route('home')}}"><img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo"></a>
     </div>
     @yield('content')
     <div id="footer">
