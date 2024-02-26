@@ -35,8 +35,8 @@
         <img src="{{ asset('img/location.png') }}" alt="" srcset="" id="locationIcon">
         <p class="roboto-bold">Barcelona</p>
     </div>
-    <form class="priceFilter">
-        <input oninput="getRestaurants()" type="number" name="min_price" id="min_price" class="inputNumFilter border-right roboto-medium" placeholder="Precio min.">
+    <form class="priceFilter" style="width:16%;padding-right:1%;">
+        <input oninput="getRestaurants()" type="number" name="min_price" id="min_price" class="inputNumFilter border-right roboto-medium" placeholder="Precio min." style="float: right;">
         <input oninput="getRestaurants()" type="number" name="max_price" id="max_price" class="inputNumFilter roboto-medium" placeholder="Precio max.">
     </form>
     <div class="dropdown-container">
