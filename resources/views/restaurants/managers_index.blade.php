@@ -1,29 +1,37 @@
 @extends('layouts.layout_search')
 
-@section('titulo','The Foot - Mis restaurantes')
+@section('titulo', 'The Foot - Mis restaurantes')
 @section('regSection')
-    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
-    @if(Auth::User()->role == 'Manager')
-        <a href="{{ Route('home')}}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
+    <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
+    @if (Auth::User()->role == 'Manager')
+        <a href="{{ Route('myrestaurants') }}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
+    @else
+        @if (Auth::User()->role == 'Administrator')
+            <a href="{{ Route('crud.restaurants') }}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>
+            <a href="{{ Route('crud.users') }}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>
+        @endif
     @endif
     <br>
 @endsection
 @section('content')
-    
+
 @endsection
 @section('searchContainer')
-<br>
-<button class="btn-primary" style="margin-left: 40px;" onclick="displayRestaurantForm()" >Crear nuevo restaurante</button>
-<br><br><br>
-<div id="restaurant-table">
+    <br>
+    <button class="btn-primary" style="margin-left: 40px;" onclick="displayRestaurantForm()">Crear nuevo
+        restaurante</button>
+    <br><br><br>
+    <div id="restaurant-table">
 
-</div>
+    </div>
 
-    
+
 @endsection
 
 <style>
-    td, tr {
+    td,
+    tr {
         border: 1px solid black;
         padding: 5px 12px;
     }
@@ -54,9 +62,9 @@
     }
 
     .images-container::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: #f1f1f1;
     }
-    
+
     .images-container::-webkit-scrollbar-thumb {
         background: #006657;
         border-radius: 0.25em;
@@ -121,7 +129,7 @@
         justify-content: center;
         gap: 40px;
     }
-    
+
     .restaurant-form.two-columns .restaurant-form-info {
         width: 50%;
         float: left;
@@ -151,10 +159,8 @@
         gap: 15px;
     }
 
-    .restaurant-form form 
-    input[type="text"], 
-    input[type="number"] 
-    {
+    .restaurant-form form input[type="text"],
+    input[type="number"] {
         border: none;
         border-bottom: 2px solid rgb(0, 0, 0);
         background-color: rgba(255, 255, 255, 0);
@@ -208,20 +214,23 @@
         border-color: #d5d8dc;
         background-color: white;
     }
-    .restaurant-form .input-group select:hover{
+
+    .restaurant-form .input-group select:hover {
         border-color: #006399;
         background-color: #f6f6f6;
         color: #006399;
     }
-    .restaurant-form .input-group select:focus{
+
+    .restaurant-form .input-group select:focus {
         border-color: #006399;
         background-color: #f6f6f6;
         color: #006399;
-        -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
-        -moz-box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
-        box-shadow: inset 0px 0px 1px 1px rgba(0,99,153,1);
+        -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 99, 153, 1);
+        -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 99, 153, 1);
+        box-shadow: inset 0px 0px 1px 1px rgba(0, 99, 153, 1);
     }
-    .restaurant-form .input-group select>option{
+
+    .restaurant-form .input-group select>option {
         color: black;
     }
 
@@ -247,7 +256,7 @@
         color: white;
         font-size: 17px;
         text-overflow: ellipsis;
-        overflow: hidden; 
+        overflow: hidden;
         white-space: nowrap;
     }
 
@@ -267,7 +276,7 @@
         justify-content: center;
     }
 
-    .restaurant-form .foodtypes-selector > div {
+    .restaurant-form .foodtypes-selector>div {
         margin-bottom: 10px;
     }
 
@@ -283,25 +292,30 @@
         cursor: pointer;
     }
 
-    .restaurant-form .foodtypes-selector input:checked ~ label {
+    .restaurant-form .foodtypes-selector input:checked~label {
         background-color: rgb(108, 108, 108);
         color: white;
     }
+
     label {
         color: black !important;
     }
+
     input {
         height: 30px !important;
     }
+
     .fake-file-input label {
         color: white !important;
     }
-    .resIcon_{
+
+    .resIcon_ {
         margin-top: 0%;
         margin-bottom: 0%;
         width: 5%;
         margin-left: 2%;
     }
+
     .btn-primary {
         background-color: #006657;
         padding: 10px 20px;
@@ -312,9 +326,11 @@
         border: none;
         border-radius: 4px;
     }
+
     .btn-primary:hover {
         background-color: #004d41;
     }
+
     .resContainer {
         padding: 20px;
     }
@@ -322,14 +338,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-
     function displayRestaurants(restaurants) {
         let restaurantTable = document.getElementById('restaurant-table');
         restaurantTable.innerHTML = '';
-        
+
         restaurants.forEach(restaurant => {
             let restaurantStatus = restaurant.status == 0 ? 'Pendiente' :
-                                    restaurant.status == 1 ? 'Aprobado' : 'Rechazado';
+                restaurant.status == 1 ? 'Aprobado' : 'Rechazado';
 
             let restaurantHTML = `
             <div class="resContainer row">
@@ -343,7 +358,7 @@
                     <span class="roboto-bold">Tipos de comida: </span>`;
             restaurant.foodtypes.forEach(foodtype => {
                 restaurantHTML += `
-                <img src="{{asset('img/icons/food/')}}/${foodtype.icon}" class="resIcon_">`;
+                <img src="{{ asset('img/icons/food/') }}/${foodtype.icon}" class="resIcon_">`;
             });
             restaurantHTML += `
                 </div>
@@ -360,7 +375,7 @@
     }
 
 
-    function displayRestaurantForm(id=null) {
+    function displayRestaurantForm(id = null) {
         Swal.fire({
             title: id ? 'Editar restaurante' : 'Crear restaurante',
             html: `
@@ -451,7 +466,7 @@
     }
 
 
-    function validateRestaurantForm(is_edit=false) {
+    function validateRestaurantForm(is_edit = false) {
         const name = document.getElementById('restaurant-name').value;
         const description = document.getElementById('restaurant-description').value;
         const location = document.getElementById('restaurant-location').value;
@@ -505,15 +520,15 @@
         document.getElementById('restaurant-average_price').value = restaurant.average_price;
 
         fetch("{{ route('api.foodtypes.list') }}")
-        .then((res) => res.text())
-        .then((responseText) => {
-            let foodtypes = JSON.parse(responseText);
-            displayFoodtypes(foodtypes);
+            .then((res) => res.text())
+            .then((responseText) => {
+                let foodtypes = JSON.parse(responseText);
+                displayFoodtypes(foodtypes);
 
-            restaurant.foodtypes.forEach(foodtype => {
-                document.getElementById(`foodtypes-${foodtype.id}`).checked = true;
-            });
-        })
+                restaurant.foodtypes.forEach(foodtype => {
+                    document.getElementById(`foodtypes-${foodtype.id}`).checked = true;
+                });
+            })
 
         displayRestaurantImages(restaurant.images);
     }
@@ -545,31 +560,31 @@
 
     function getRestaurants() {
         fetch("{{ route('api.manager.restaurants.list') }}")
-        .then((res) => res.text())
-        .then((responseText) => {
-            let restaurants = JSON.parse(responseText);
-            displayRestaurants(restaurants);
-        })
+            .then((res) => res.text())
+            .then((responseText) => {
+                let restaurants = JSON.parse(responseText);
+                displayRestaurants(restaurants);
+            })
     }
 
 
     function getRestaurant(id) {
         fetch("{{ route('api.manager.restaurants.show') }}" + "?id=" + id)
-        .then((res) => res.text())
-        .then((responseText) => {
-            let restaurant = JSON.parse(responseText);
-            displayRestaurant(restaurant);
-        })
+            .then((res) => res.text())
+            .then((responseText) => {
+                let restaurant = JSON.parse(responseText);
+                displayRestaurant(restaurant);
+            })
     }
 
-    
+
     function getFoodtypes() {
         fetch("{{ route('api.foodtypes.list') }}")
-        .then((res) => res.text())
-        .then((responseText) => {
-            let foodtypes = JSON.parse(responseText);
-            displayFoodtypes(foodtypes);
-        })
+            .then((res) => res.text())
+            .then((responseText) => {
+                let foodtypes = JSON.parse(responseText);
+                displayFoodtypes(foodtypes);
+            })
     }
 
 
@@ -578,18 +593,18 @@
         let formData = new FormData(form);
 
         return fetch("{{ route('api.manager.restaurants.store') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: formData
-        })
-        .then(response => {
-            getRestaurants();
-        })
-        .catch(error => {
-            console.log(error);
-        });
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: formData
+            })
+            .then(response => {
+                getRestaurants();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
 
@@ -600,18 +615,18 @@
         formData.append('_method', 'PUT');
 
         return fetch("{{ route('api.manager.restaurants.update') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: formData
-        })
-        .then(response => {
-            getRestaurants();
-        })
-        .catch(error => {
-            console.log(error);
-        });
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: formData
+            })
+            .then(response => {
+                getRestaurants();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
 
@@ -633,37 +648,41 @@
 
     function deleteRestaurant(id) {
         fetch("{{ route('api.manager.restaurants.destroy') }}", {
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({id: id})
-        })
-        .then(() => {
-            getRestaurants();
-        })
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    id: id
+                })
+            })
+            .then(() => {
+                getRestaurants();
+            })
     }
 
 
     function deleteRestaurantImage(id) {
         fetch("{{ route('api.manager.restaurants.images.destroy_image') }}", {
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({id: id})
-        })
-        .then((res) => res.text())
-        .then((responseText) => {
-            let images = JSON.parse(responseText);
-            displayRestaurantImages(images);
-        })
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    id: id
+                })
+            })
+            .then((res) => res.text())
+            .then((responseText) => {
+                let images = JSON.parse(responseText);
+                displayRestaurantImages(images);
+            })
     }
 
 
@@ -675,19 +694,19 @@
         formData.append('image', image);
 
         fetch("{{ route('api.manager.restaurants.images.attach_image') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: formData
-        })
-        .then((res) => res.text())
-        .then((responseText) => {
-            let images = JSON.parse(responseText);
-            displayRestaurantImages(images);
-            document.getElementById('restaurant-images-input').value = '';
-            document.getElementById('restaurant-images-label').innerText = 'Choose a file...';
-        })
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: formData
+            })
+            .then((res) => res.text())
+            .then((responseText) => {
+                let images = JSON.parse(responseText);
+                displayRestaurantImages(images);
+                document.getElementById('restaurant-images-input').value = '';
+                document.getElementById('restaurant-images-label').innerText = 'Choose a file...';
+            })
     }
 
 
@@ -698,15 +717,15 @@
         document.getElementById(`${input}-label`).innerText = imageName;
     }
 
-    
+
     function changeMultipleInputLabel(input) {
         let inputCount = document.getElementById(`${input}-input`).files.length;
         document.getElementById(`${input}-label`).innerText = `${inputCount} files selected`;
     }
 
-    window.onload = function () {
+    window.onload = function() {
         getRestaurants();
     }
-
 </script>
+
 </html>

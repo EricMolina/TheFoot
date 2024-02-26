@@ -2,6 +2,15 @@
 @section('titulo', 'Usuarios')
 @section('regSection')
     <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
+    @if (Auth::User()->role == 'Manager')
+        <a href="{{ Route('myrestaurants') }}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
+    @else
+        @if (Auth::User()->role == 'Administrator')
+            <a href="{{ Route('crud.restaurants') }}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>
+            <a href="{{ Route('crud.users') }}" id="regBtn" class="roboto-medium">GESTIONAR USUARIOS</a>
+        @endif
+    @endif
     <br>
 @endsection
 @section('slider')
@@ -18,27 +27,27 @@
         }
 
         /* table {
-                width: 100%;
-                border-collapse: collapse;
-            } */
+                        width: 100%;
+                        border-collapse: collapse;
+                    } */
         /* th, td {
-                padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
+                        padding: 8px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
 
-            th {
-                background-color: #f2f2f2;
-            }
+                    th {
+                        background-color: #f2f2f2;
+                    }
 
-            tr:hover {
-                background-color: #f5f5f5;
-            }
+                    tr:hover {
+                        background-color: #f5f5f5;
+                    }
 
-            td img {
-                widows: 100px;
-                height: 100px;
-            } */
+                    td img {
+                        widows: 100px;
+                        height: 100px;
+                    } */
     </style>
 @endsection
 @section('content')
@@ -46,21 +55,31 @@
     <button class="crudCreateBtn" href="#" onclick="createUser()">Crear</button>
     <br>
     <style>
+        input {
+            height: 25px !important;
+        }
+
         .users-form {
             width: 100%;
             display: flex;
             justify-content: center;
             gap: 40px;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        .users-form.two-columns .users-form-info {
-            width: 50%;
+        .users-form-info {
+            width: 100% !important;
+            height: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
             float: left;
         }
 
-        .users-form-images {
-            width: 50%;
-            float: left;
+        #createUserForm,
+        #editUserForm {
+            width: 90%;
+            height: 100%;
         }
 
         .users-form:not(.two-columns) {
@@ -70,10 +89,6 @@
         .users-form:not(.two-columns) .users-form-info {
             display: flex;
             justify-content: center;
-        }
-
-        .users-form:not(.two-columns) .users-form-images {
-            width: 0%;
         }
 
         .users-form form {
@@ -225,8 +240,6 @@
     </head>
 
     <body>
-        <h1>Crud usuarios</h1>
-        <a href="#" onclick="createUser()">Crear nuevo usuario</a>
         <br>
         <table>
             <thead>
@@ -514,5 +527,6 @@
             }
         </script>
     </body>
+@endsection
 
-    </html>
+</html>

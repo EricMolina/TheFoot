@@ -6,7 +6,7 @@
         <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     
         @if(Auth::User()->role == 'Manager')         
-            <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
+            <a href="{{ Route('myrestaurants')}}" id="regBtn" class="roboto-medium">MIS RESTAURANTES</a>
         @else
             @if(Auth::User()->role == 'Administrator')         
                 <a href="{{ Route('crud.restaurants')}}" id="regBtn" class="roboto-medium">GESTIONAR RESTAURANTES</a>            
