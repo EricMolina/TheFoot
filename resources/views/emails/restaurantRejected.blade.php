@@ -57,23 +57,20 @@
         <div class="header">
             <h1>TheFoot</h1>
         </div>
-        @php
-            $updatedAttributes = $updatedRestaurant->getAttributes();
-            $oldAttributes = $oldRestaurant->getAttributes();
-        @endphp
         <div class="content">
-            <h2>{{ $updatedRestaurant->name }}</h2>
-            <h5>Buenos días, {{ $manager }}.</h5>
-            <p>Se han realizado los siguientes cambios de este restaurante a su cargo:</p>
+            <h2>{{ $restaurant->name }}</h2>
+            <h5> {{ $manager }}, Su restaurante ha sido denegado.</h5>
+            <p>Hemos revisado su restaurante, y no cumple con nuestra normativa. Modifique lo necesario para que podamos volver a hacer la revisión del mismo.</p>
+            <p>Estos son los datos del restaurante que hemos denegado:</p>
             <ul>
-                @foreach($updatedAttributes as $key => $value)
-                    @if($key !== 'updated_at' && array_key_exists($key, $oldAttributes) && $value != $oldAttributes[$key])
-                        <li><span>{{ $key }}:</span> {{ $oldAttributes[$key] }} => {{ $value }}</li>
-                    @endif
-                @endforeach
+                <li><span>Nombre:</span> {{ $restaurant->name }}</li>
+                <li><span>Descripción:</span> {{ $restaurant->description }}</li>
+                <li><span>Localización:</span> {{ $restaurant->location }}</li>
+                <li><span>Portada:</span> {{ $restaurant->thumbnail }}</li>
+                <li><span>Precio medio:</span> {{ $restaurant->average_price }}</li>
             </ul>
             <br>
-            <p>Si ha recibido este correo por error o se han realizado cambios que no son de su agrado, por favor, accede a su gestor de restaurantes y realice una reclamación.</p>
+            <p>Si ha recibido este correo por error o se ha denegado un restaurante que desconoce, por favor, accede a su gestor de restaurantes y realice una reclamación.</p>
         </div>
     </div>
 </body>

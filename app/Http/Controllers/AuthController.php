@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Welcome;
+
 class AuthController extends Controller
 {
     // Registro
@@ -40,6 +43,11 @@ class AuthController extends Controller
             'profile_image' => $imageName,
             'role' => $request->role,
         ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        Mail::to($user->email)->send(new Welcome($user));
+
         return redirect()->route('login');
     }
 

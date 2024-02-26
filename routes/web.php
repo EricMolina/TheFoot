@@ -7,6 +7,7 @@ use App\Http\Controllers\ValorationController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminRestaurantController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ManagerRestaurantController;
 use App\Mail\RestaurantChanged;
 use App\Http\Controllers\FoodtypeController;
 
@@ -32,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     //Ruta default, los restaurantes
     Route::get('/', function () {
         return view('search');
-    });
+    })->name('home');
     //Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
 
     Route::controller(RestaurantController::class)->group(function () {
@@ -48,6 +49,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(FoodtypeController::class)->group(function () {
         Route::get('/api/foodtypes', 'list')->name('api.foodtypes.list');
+    });
+});
+
+Route::middleware(['manager'])->group(function () {
+    Route::controller(ManagerRestaurantController::class)->group(function () {
+        Route::get('/api/manager/restaurants', 'list')->name('api.manager.restaurants.list');
+        Route::get('/api/manager/restaurants/show', 'show')->name('api.manager.restaurants.show');
+        Route::post('/api/manager/restaurants/store', 'store')->name('api.manager.restaurants.store');
+        Route::delete('/api/manager/restaurants/', 'destroy')->name('api.manager.restaurants.destroy');
+        Route::put('/api/manager/restaurants/', 'update')->name('api.manager.restaurants.update');
+        Route::delete('/api/manager/restaurants/images/', 'destroy_image')->name('api.manager.restaurants.images.destroy_image');
+        Route::post('/api/manager/restaurants/images/', 'attach_image')->name('api.manager.restaurants.images.attach_image');
+
+        Route::get('/my/restaurants/', 'index')->name('myrestaurants');
     });
 });
 

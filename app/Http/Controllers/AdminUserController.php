@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\RestaurantChanged;
-
 class AdminUserController extends Controller
 {
     public function index()
@@ -87,11 +84,6 @@ class AdminUserController extends Controller
             unset($data['password']);
         }
         $user->update($data);
-
-        // Get the restaurants from the request
-        $updatedRestaurant = $request->updatedRestaurant;
-        $oldRestaurant = $request->oldRestaurant;
-        Mail::to('maxylandbuzon@gmail.com')->send(new RestaurantChanged($updatedRestaurant, $oldRestaurant));
         
         return "ok";
     }

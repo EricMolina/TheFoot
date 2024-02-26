@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdmin
+class CheckManager
 {
     public function handle($request, Closure $next)
     {
@@ -13,7 +13,7 @@ class CheckAdmin
             return redirect('login');
         }
 
-        if (Auth::user()->role !== 'Administrator') {
+        if (Auth::user()->role !== 'Manager') {
             return redirect('/');
         }
 
