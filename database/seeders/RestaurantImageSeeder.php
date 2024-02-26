@@ -16,27 +16,19 @@ class RestaurantImageSeeder extends Seeder
      */
     public function run()
     {
-        $restaurant1 = Restaurant::where('name', "Pizzeria Alberto's")->first();
-        $restaurant2 = Restaurant::where('name', "Salchipapa de l'esquina")->first();
+        $restaurants = Restaurant::all();
 
-        RestaurantImage::create([
-            'restaurant_id' => $restaurant1->id,
-            'image_url' => ''
-        ]);
+        foreach ($restaurants as $restaurant) {
+            for ($i=1; $i <= 3 ; $i++) { 
 
-        RestaurantImage::create([
-            'restaurant_id' => $restaurant1->id,
-            'image_url' => ''
-        ]);
+                $restaurant_id = $restaurant->id;
 
-        RestaurantImage::create([
-            'restaurant_id' => $restaurant2->id,
-            'image_url' => ''
-        ]);
+                RestaurantImage::create([
+                    'restaurant_id' => $restaurant_id,
+                    'image_url' => "example$restaurant_id-$i.jpg"
+                ]);
 
-        RestaurantImage::create([
-            'restaurant_id' => $restaurant2->id,
-            'image_url' => ''
-        ]);
+            }
+        }
     }
 }

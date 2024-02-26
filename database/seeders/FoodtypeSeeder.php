@@ -16,43 +16,53 @@ class FoodtypeSeeder extends Seeder
     public function run()
     {
         Foodtype::create([
-            'name' => "Italiana"
+            'name' => "Italiana",
+            'icon' => 'italiano.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Japonesa"
+            'name' => "Japonesa",
+            'icon' => 'japones.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Kebab"
+            'name' => "Kebab",
+            'icon' => 'kebab.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Vegana"
+            'name' => "Vegana",
+            'icon' => 'vegano.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Griega"
+            'name' => "Griega",
+            'icon' => 'griego.webp'
         ]);
 
         Foodtype::create([
-            'name' => "China"
+            'name' => "China",
+            'icon' => 'china.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Turca"
+            'name' => "Desayuno",
+            'icon' => 'desayuno.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Colombiana"
+            'name' => "Americano",
+            'icon' => 'americano.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Venezolana"
+            'name' => "Venezolana",
+            'icon' => 'venezolano.webp'
         ]);
 
         Foodtype::create([
-            'name' => "Tailandesa"
+            'name' => "Tailandesa",
+            'icon' => 'thailandes.webp'
         ]);
     }
 }
