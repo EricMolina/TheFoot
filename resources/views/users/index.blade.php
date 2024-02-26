@@ -1,7 +1,7 @@
 @extends('layouts.layout_login')
-@section('titulo','Usuarios')
+@section('titulo', 'Usuarios')
 @section('regSection')
-    <a href="{{ Route('logout')}}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
+    <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <br>
 @endsection
 @section('slider')
@@ -12,43 +12,40 @@
             font-weight: 300;
             font-style: normal;
         }
-        label{
+
+        label {
             color: initial
         }
+
         /* table {
-            width: 100%;
-            border-collapse: collapse;
-        } */
+                width: 100%;
+                border-collapse: collapse;
+            } */
         /* th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
 
-        th {
-            background-color: #f2f2f2;
-        }
+            th {
+                background-color: #f2f2f2;
+            }
 
-        tr:hover {
-            background-color: #f5f5f5;
-        }
+            tr:hover {
+                background-color: #f5f5f5;
+            }
 
-        td img {
-            widows: 100px;
-            height: 100px;
-        } */
+            td img {
+                widows: 100px;
+                height: 100px;
+            } */
     </style>
 @endsection
 @section('content')
-<h1 class="crudTitle">Usuarios</h1>
+    <h1 class="crudTitle">Usuarios</h1>
     <button class="crudCreateBtn" href="#" onclick="createUser()">Crear</button>
     <br>
-        }
-
-
-
-
-
+    <style>
         .users-form {
             width: 100%;
             display: flex;
@@ -225,40 +222,40 @@
             color: white;
         }
     </style>
-</head>
+    </head>
 
-<body>
-    <h1>Crud usuarios</h1>
-    <a href="#" onclick="createUser()">Crear nuevo usuario</a>
-    <br>
-    <table>
-        <thead>
-            <tr class="tableHeader">
-                <th class="roboto-bold">Name</th>
-                <th class="roboto-bold">Email</th>
-                <th class="roboto-bold">Role</th>
-                <th class="roboto-bold">Profile Image</th>
-                <th class="roboto-bold">Acciones</th>
-                {{-- <th class="roboto-bold">Eliminar</th> --}}
-            </tr>
-        </thead>
-        <tbody id="userList">
-            <!-- BEGIN: userList -->
-            <!-- END: userList -->
-        </tbody>
-    </table>
+    <body>
+        <h1>Crud usuarios</h1>
+        <a href="#" onclick="createUser()">Crear nuevo usuario</a>
+        <br>
+        <table>
+            <thead>
+                <tr class="tableHeader">
+                    <th class="roboto-bold">Name</th>
+                    <th class="roboto-bold">Email</th>
+                    <th class="roboto-bold">Role</th>
+                    <th class="roboto-bold">Profile Image</th>
+                    <th class="roboto-bold">Acciones</th>
+                    {{-- <th class="roboto-bold">Eliminar</th> --}}
+                </tr>
+            </thead>
+            <tbody id="userList">
+                <!-- BEGIN: userList -->
+                <!-- END: userList -->
+            </tbody>
+        </table>
 
-    <br>
-    <script>
-        function loadUsers() {
-            fetch("{{ route('api.admin.users.list') }}")
-                .then(response => response.json())
-                .then(data => {
-                    let userList = document.getElementById('userList');
-                    userList.innerHTML = '';
+        <br>
+        <script>
+            function loadUsers() {
+                fetch("{{ route('api.admin.users.list') }}")
+                    .then(response => response.json())
+                    .then(data => {
+                        let userList = document.getElementById('userList');
+                        userList.innerHTML = '';
 
-                    data.forEach(user => {
-                        userList.innerHTML += `
+                        data.forEach(user => {
+                            userList.innerHTML += `
                                                 <tr>
                                                     <td>${user.name}</td>
                                                     <td>${user.email}</td>
@@ -267,18 +264,18 @@
                                                     <td><button class="UserCrudDeleteBtn" onclick="deleteUser(${user.id})">Eliminar</button></br><button class="UserCrudEditBtn" onclick="editUser(${user.id})">Editar</button></td>
                                                 </tr>
                                             `;
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
                     });
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-        loadUsers();
+            }
+            loadUsers();
 
-        function createUser() {
-            Swal.fire({
-                title: 'Crear usuario',
-                html: `
+            function createUser() {
+                Swal.fire({
+                    title: 'Crear usuario',
+                    html: `
                 <div class="users-form">
                     <div class="users-form-info">
                         <form id="createUserForm" enctype="multipart/form-data">
@@ -314,89 +311,89 @@
                     </div>
                 </div>
                 `,
-                showCancelButton: true,
-                confirmButtonText: 'Crear',
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#006657',
-                preConfirm: () => {
-                    let form = document.getElementById('createUserForm');
-                    let formData = new FormData(form);
+                    showCancelButton: true,
+                    confirmButtonText: 'Crear',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#006657',
+                    preConfirm: () => {
+                        let form = document.getElementById('createUserForm');
+                        let formData = new FormData(form);
 
-                    // Perform form validation
-                    if (!validateForm(true)) {
-                        return false;
-                    }
+                        // Perform form validation
+                        if (!validateForm(true)) {
+                            return false;
+                        }
 
-                    return fetch("{{ route('api.admin.users.store') }}", {
-                            method: 'POST',
-                            headers: {
-                                "X-Requested-With": "XMLHttpRequest",
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: formData
-                        })
-                        .then(response => {
-                            console.log(response);
-                            loadUsers(); // Reload the user list after creating a new user
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-                }
-            });
-        }
-
-        function deleteUser(id) {
-            Swal.fire({
-                title: 'Eliminar usuario',
-                text: '¿Estás seguro de que quieres eliminar este usuario?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Eliminar',
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#006657',
-                preConfirm: () => {
-                    fetch("{{ route('api.admin.users.destroy') }}", {
-                            method: 'DELETE',
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                id: id
+                        return fetch("{{ route('api.admin.users.store') }}", {
+                                method: 'POST',
+                                headers: {
+                                    "X-Requested-With": "XMLHttpRequest",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData
                             })
-                        })
-                        .then(response => {
-                            console.log(response);
-                            loadUsers(); // Reload the user list after deleting a user
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-                }
-            });
-        }
+                            .then(response => {
+                                console.log(response);
+                                loadUsers(); // Reload the user list after creating a new user
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    }
+                });
+            }
 
-        function editUser(id) {
-            fetch("{{ route('api.admin.users.show') }}", {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        id: id
+            function deleteUser(id) {
+                Swal.fire({
+                    title: 'Eliminar usuario',
+                    text: '¿Estás seguro de que quieres eliminar este usuario?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#006657',
+                    preConfirm: () => {
+                        fetch("{{ route('api.admin.users.destroy') }}", {
+                                method: 'DELETE',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Accept": "application/json",
+                                    "X-Requested-With": "XMLHttpRequest",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({
+                                    id: id
+                                })
+                            })
+                            .then(response => {
+                                console.log(response);
+                                loadUsers(); // Reload the user list after deleting a user
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    }
+                });
+            }
+
+            function editUser(id) {
+                fetch("{{ route('api.admin.users.show') }}", {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            id: id
+                        })
                     })
-                })
-                .then(response => response.json())
-                .then(user => {
-                    Swal.fire({
-                        title: 'Editar usuario',
-                        html: `
+                    .then(response => response.json())
+                    .then(user => {
+                        Swal.fire({
+                            title: 'Editar usuario',
+                            html: `
                         <div class="users-form">
                             <div class="users-form-info">
                                 <form id="editUserForm" enctype="multipart/form-data">
@@ -436,86 +433,86 @@
                             </div>
                         </div>
                         `,
-                        showCancelButton: true,
-                        confirmButtonText: 'Guardar',
-                        cancelButtonText: 'Cancelar',
-                        confirmButtonColor: '#006657',
-                        preConfirm: () => {
-                            let form = document.getElementById('editUserForm');
-                            let formData = new FormData(form);
-                            formData.append('id', id);
-                            formData.append("_method", "PUT");
+                            showCancelButton: true,
+                            confirmButtonText: 'Guardar',
+                            cancelButtonText: 'Cancelar',
+                            confirmButtonColor: '#006657',
+                            preConfirm: () => {
+                                let form = document.getElementById('editUserForm');
+                                let formData = new FormData(form);
+                                formData.append('id', id);
+                                formData.append("_method", "PUT");
 
-                            // Perform form validation
-                            if (!validateForm()) {
-                                return false;
+                                // Perform form validation
+                                if (!validateForm()) {
+                                    return false;
+                                }
+
+                                return fetch("{{ route('api.admin.users.update') }}", {
+                                        method: 'POST',
+                                        headers: {
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        body: formData
+                                    })
+                                    .then(response => {
+                                        console.log(response);
+                                        loadUsers(); // Reload the user list after editing a user
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
+                                    });
                             }
-
-                            return fetch("{{ route('api.admin.users.update') }}", {
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    body: formData
-                                })
-                                .then(response => {
-                                    console.log(response);
-                                    loadUsers(); // Reload the user list after editing a user
-                                })
-                                .catch(error => {
-                                    console.log(error);
-                                });
-                        }
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
                     });
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
-        function validateForm(withPassword = false) {
-            let name = document.getElementById('name').value;
-            let email = document.getElementById('email').value;
-            let role = document.getElementById('role').value;
-            let password = null;
-            if (withPassword) {
-                password = document.getElementById('password').value;
             }
 
-            if (name.trim() === '') {
-                Swal.showValidationMessage('Por favor, introduce un nombre válido');
-                return false;
+            function validateForm(withPassword = false) {
+                let name = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+                let role = document.getElementById('role').value;
+                let password = null;
+                if (withPassword) {
+                    password = document.getElementById('password').value;
+                }
+
+                if (name.trim() === '') {
+                    Swal.showValidationMessage('Por favor, introduce un nombre válido');
+                    return false;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email.trim() === '' || !emailRegex.test(email)) {
+                    Swal.showValidationMessage('Por favor, introduce un email válido');
+                    return false;
+                }
+
+                if (role.trim() === '') {
+                    Swal.showValidationMessage('Por favor, selecciona un rol');
+                    return false;
+                } else if (role.trim() !== 'Client' && role.trim() !== 'Manager' && role.trim() !== 'Administrator') {
+                    Swal.showValidationMessage('Por favor, selecciona un rol válido');
+                    return false;
+                }
+
+                if (withPassword && password.trim() === '') {
+                    Swal.showValidationMessage('Por favor, introduce una contraseña válida');
+                    return false;
+                }
+
+                return true;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email.trim() === '' || !emailRegex.test(email)) {
-                Swal.showValidationMessage('Por favor, introduce un email válido');
-                return false;
+            function changeInputLabel(input) {
+                let inputValue = document.getElementById(`${input}`).value;
+                let inputValueSplit = inputValue.split('\\');
+                let imageName = inputValueSplit[inputValueSplit.length - 1]
+                document.getElementById(`${input}-label`).innerText = imageName;
             }
+        </script>
+    </body>
 
-            if (role.trim() === '') {
-                Swal.showValidationMessage('Por favor, selecciona un rol');
-                return false;
-            } else if (role.trim() !== 'Client' && role.trim() !== 'Manager' && role.trim() !== 'Administrator') {
-                Swal.showValidationMessage('Por favor, selecciona un rol válido');
-                return false;
-            }
-
-            if (withPassword && password.trim() === '') {
-                Swal.showValidationMessage('Por favor, introduce una contraseña válida');
-                return false;
-            }
-
-            return true;
-        }
-
-        function changeInputLabel(input) {
-            let inputValue = document.getElementById(`${input}`).value;
-            let inputValueSplit = inputValue.split('\\');
-            let imageName = inputValueSplit[inputValueSplit.length - 1]
-            document.getElementById(`${input}-label`).innerText = imageName;
-        }
-    </script>
-</body>
-
-</html>
+    </html>
