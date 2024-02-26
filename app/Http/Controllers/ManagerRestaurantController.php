@@ -124,8 +124,6 @@ class ManagerRestaurantController extends Controller
             $restaurant->description = $request->description;
             $restaurant->location = $request->location;
             $restaurant->average_price = $request->average_price;
-            $restaurant->status = $request->status;
-            $restaurant->manager_id = $manager->id;
 
             // Update restaurant thumbnail
             if ($request->hasFile('thumbnail')) {

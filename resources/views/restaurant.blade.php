@@ -186,6 +186,7 @@
                 .catch((error) => {
                     console.error('Error:', error.message);
                 });
+                CerrarAbrirForm();
         });
 
         function displayRestaurant(restaurant) {
@@ -249,7 +250,7 @@
 
                 valorationElement +=
                     `   </div>
-                        <img src="{{ asset('img/carousel2.jpg') }}" class="profilePic">
+                        <img src="{{ asset('images/profiles') }}/${valoration.user.profile_image ? valoration.user.profile_image : "default.png" }" class="profilePic">
                         <p class="roboto-bold userOp">${valoration.user.name}</p>
                         <p class="roboto-light-italic dateOp">${valorationDate}</p>
                         <br>

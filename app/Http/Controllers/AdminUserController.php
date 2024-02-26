@@ -91,7 +91,6 @@ class AdminUserController extends Controller
     public function destroy(Request $request)
     {
         $user = User::find($request->id);
-
         if ($user->role == "Manager") {
             Restaurant::where('manager_id', $user->id)->update(['manager_id' => null]);
         }
@@ -101,6 +100,9 @@ class AdminUserController extends Controller
                 unlink($previousImagePath);
             }
         }
+        $valorations = Valoration::where('user_id', $user->id);
+        $valorations->delete();
+
         $user->delete();
         return "ok";
     }

@@ -198,8 +198,12 @@ class AdminRestaurantController extends Controller
         try {
             $restaurant_image = RestaurantImage::find($request->id);
             $restaurant_id = $restaurant_image->restaurant_id;
+            $image_path = public_path('images/restaurants') . '/' . $restaurant_image->image_url;
             $restaurant_image->delete();
 
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
         } catch (Exception $e) {
             return "error";
         }
