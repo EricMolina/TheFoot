@@ -38,26 +38,7 @@
 </head>
 
 <body>
-    <form id="valorationsForm">
-        <label for="score">Puntuación:</label><br>
-        <input type="hidden" name="score" id="score" value="">
-        <div class="stars-container">
-            <img id="star-1" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-2" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-3" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-4" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-5" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-6" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-7" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-8" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-9" src="{{ asset('img/half_star.png') }}" alt="star">
-            <img id="star-10" src="{{ asset('img/half_star.png') }}" alt="star">
-        </div>
-        <label for="comment">Comentario:</label><br>
-        <textarea id="comment" name="comment"></textarea><br>
-        <input type="hidden" id="restaurant_id" name="restaurant_id" value="{{ $restaurant->id }}">
-        <input type="submit" value="Enviar">
-    </form>
+    
     <script>
         // Agregar el evento de clic a cada estrella
         let starsPainted = [];

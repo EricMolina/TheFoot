@@ -150,9 +150,11 @@
             restaurantList.innerHTML = '';
             
             restaurants.forEach(restaurant => {
-                let avg_score = Number(restaurant.valorations_avg_score).toFixed(1)
+                console.log(restaurant.valorations_avg_score / 2)
+                let avg_score = (Math.round((restaurant.valorations_avg_score / 2) * 100) / 100).toFixed(2);
+                
                 restaurantList.innerHTML += `
-                    <div class="resContainer row">
+                    <div onclick="window.location = '{{ route('restaurant') }}/?r=${restaurant.id}'" class="resContainer row">
                         <div class="col-res1"><img src="{{asset('images/thumbnails')}}/${restaurant.thumbnail}" alt="" srcset="" class="thumbnail"></div>
                         <div class="col-res2">
                             <div class="restaurant-foodtypes">

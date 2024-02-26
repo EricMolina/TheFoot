@@ -34,16 +34,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('search');
     })->name('home');
-    //Route::get('restaurants', [App\Http\Controllers\HomeController::class, 'restaurantes'])->name('restaurantes');
 
     Route::controller(RestaurantController::class)->group(function () {
-        
         Route::get('/api/restaurants', 'list')->name('api.restaurants.list');
-        Route::get('/api/restaurants/{id}', 'show')->name('api.restaurants.show');
+        Route::get('/api/restaurants/show/', 'show')->name('api.restaurants.show');
+
+        Route::get('/restaurant/', function () {
+            return view('restaurant');
+        })->name('restaurant');
     });
     
     Route::controller(ValorationController::class)->group(function () {
-        Route::get('/restaurants/{restaurant}/valorations/create', 'create')->name('valorations.create');
         Route::post('/api/valorations/store', 'store')->name('api.valorations.store');
     });
 

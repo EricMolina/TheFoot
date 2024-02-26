@@ -62,11 +62,13 @@ class RestaurantController extends Controller
     }
 
 
-    public function show($id) {
+    public function show(Request $request) {
         $restaurant = Restaurant::withAvg('valorations', 'score')
-            ->with('valorations')
+            ->with('valorations.user')
             ->with('foodtypes')
-            ->find($id);
+            ->with('images')
+            ->withCount('valorations')
+            ->find($request->id);
 
         return $restaurant;
     }
