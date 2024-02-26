@@ -3,7 +3,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 @endsection
-@section('titulo', 'The Foot - Login')
+@section('titulo', 'The Foot - Restaurante')
 @section('regSection')
     <div class="row" style="height: 20px">
         <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
@@ -53,40 +53,41 @@
             </div>
         </div>
     </div>
+    <button id="addBtn"class="roboto-bold comBtn">Comentar</button>
     {{-- formulario para poner comentarios --}}
     <div id="opForm">
         <form id="valorationsForm">
-            <label for="score">Puntuación:</label><br>
+            {{-- <label for="score">Puntuación:</label><br> --}}
             <input type="hidden" name="score" id="score" value="">
-            <div class="stars-container-iteractable">
-                <img id="star-1" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-2" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-3" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-4" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-5" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-6" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-7" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-8" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-9" src="{{ asset('img/half_star.png') }}" alt="star">
-                <img id="star-10" src="{{ asset('img/half_star.png') }}" alt="star">
+            <div class="stars-container-iteractable scoreOp">
+                <img id="star-1" src="{{ asset('img/half_star.png') }}" alt="star" class="starFilter star-empty">
+                <img id="star-2" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-3" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-4" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-5" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-6" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-7" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-8" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-9" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
+                <img id="star-10" src="{{ asset('img/half_star.png') }}" alt="star"class="starFilter star-empty">
             </div>
+            <img src="{{asset('images/profiles')}}/{{Auth::User()->profile_image}}" class="profilePic">
+            <p class="roboto-bold userOp">{{Auth::User()->name}}</p>
             <label for="comment">Comentario:</label><br>
-            <textarea id="comment" name="comment"></textarea><br>
+            <textarea id="comment" name="comment"class="commentBox"></textarea><br>
             <input type="hidden" id="restaurant_id" name="restaurant_id" value="">
-            <input type="submit" value="Enviar">
+            <input type="submit" class="roboto-bold comBtn" style="margin-left: 0.15%" value="Enviar">
         </form>
     </div>
     <div id="opinionContainer">
         <div style="display: flex; gap: 10px; align-items: center;">
             <h1 class="roboto-bold">Opiniones</h1>
-            <button id="addBtn">Comentar</button>
         </div>
         <hr class="hrMain">
         {{-- Contenido del comentario --}}
         <div id="valorations-container">
 
         </div>
-        <hr class="hrMain">
         {{-- Fin del comentario --}}
 
     </div>
@@ -199,7 +200,7 @@
             document.getElementById('restaurant-comments-count').innerText = restaurant.valorations_count;
             document.getElementById('restaurant-price').innerText = restaurant.average_price + "€";
             document.getElementById('restaurant_id').value = restaurant.id;
-
+            document.title = restaurant.name;
             displayRestaurantImages(restaurant.images);
             displayRestaurantValorations(restaurant.valorations);
         }
@@ -253,9 +254,8 @@
                         <img src="{{ asset('images/profiles') }}/${valoration.user.profile_image ? valoration.user.profile_image : "default.png" }" class="profilePic">
                         <p class="roboto-bold userOp">${valoration.user.name}</p>
                         <p class="roboto-light-italic dateOp">${valorationDate}</p>
-                        <br>
                         <p class="op roboto-medium-italic">${valoration.comment}</p>
-                    </div><br>`;
+                    </div><hr class="hrRes"><br>`;
 
                 valorationsContainer.innerHTML += valorationElement;
             });

@@ -15,7 +15,7 @@
 <body>
     @yield('regSection')
     <div id="menuContriner">
-        <img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo">
+        <a href="{{ Route('home')}}"><img src="{{ asset('img/logo.png') }}" alt="" srcset="" id="logo"></a>
         @yield('filtro')
     </div>
     <div id="searchContainer">

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Restaurant;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
