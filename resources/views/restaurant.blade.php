@@ -3,7 +3,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 @endsection
-@section('titulo', 'The Foot - Login')
+@section('titulo', 'The Foot - Restaurante')
 @section('regSection')
     <div class="row" style="height: 20px">
         <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
@@ -200,7 +200,7 @@
             document.getElementById('restaurant-comments-count').innerText = restaurant.valorations_count;
             document.getElementById('restaurant-price').innerText = restaurant.average_price + "€";
             document.getElementById('restaurant_id').value = restaurant.id;
-
+            document.title = restaurant.name;
             displayRestaurantImages(restaurant.images);
             displayRestaurantValorations(restaurant.valorations);
         }

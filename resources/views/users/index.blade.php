@@ -1,5 +1,5 @@
 @extends('layouts.layout_login')
-@section('titulo', 'Usuarios')
+@section('titulo', 'Usuarios - CRUD')
 @section('regSection')
     <a href="{{ Route('logout') }}" id="regBtn" class="roboto-medium">CERRAR SESIÓN</a>
     <a href="{{ Route('home') }}" id="regBtn" class="roboto-medium">PÁGINA PRINCIPAL</a>
