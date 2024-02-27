@@ -71,8 +71,17 @@ Para controlar que los usuarios solo puedan acceder a secciones que le correspon
 
 **Por defecto cuando se crea un usuario este tiene el rol de cliente y es el administrador el que se encargará de modificarlo**
 
+## Daily Meeting
+
+[https://docs.google.com/spreadsheets/d/11fd6nZ5RuAC7MexqmZraf5XDbe6kfFzZ](https://docs.google.com/spreadsheets/d/11fd6nZ5RuAC7MexqmZraf5XDbe6kfFzZ)
+
+
+
 ## Diagrama de la Base de datos
 
 ![image](https://github.com/EricMolina/TheFoot/assets/91189374/cde0b9c2-c138-446c-95f2-f4477d72ebe2)
+
+
+
 
   
